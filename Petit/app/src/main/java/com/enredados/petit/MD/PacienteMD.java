@@ -1,4 +1,4 @@
-package com.example.petit;
+package com.enredados.petit.MD;
 
 public class PacienteMD {
     /*

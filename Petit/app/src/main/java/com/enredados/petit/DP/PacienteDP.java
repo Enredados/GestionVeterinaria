@@ -1,4 +1,4 @@
-package com.example.petit;
+package com.enredados.petit.DP;
 
 /*import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;

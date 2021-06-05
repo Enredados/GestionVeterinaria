@@ -1,8 +1,10 @@
-package com.enredados.petit;
+package com.enredados.petit.GUI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.enredados.petit.R;
 
 enum ProviderType{
     BASIC
