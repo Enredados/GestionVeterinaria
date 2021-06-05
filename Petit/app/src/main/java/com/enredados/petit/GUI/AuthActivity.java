@@ -38,7 +38,7 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     public void setup() {
-        EditText emailView = findViewById(R.id.emailEditText);
+        EditText emailView = findViewById(R.id.nombreEditText);
         EditText passView = findViewById(R.id.passwordEditText);
         Button registrar = findViewById(R.id.signUpButton);
         Button ingresar = findViewById(R.id.logInButton);
@@ -47,24 +47,7 @@ public class AuthActivity extends AppCompatActivity {
         registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!emailView.getText().toString().isEmpty() && !passView.getText().toString().isEmpty()) {
-                    System.out.println(emailView.getText().toString() + " " + passView.getText().toString());
-
-                    FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailView.getText().toString(), passView.getText().toString())
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if(task.isSuccessful())
-                                    {
-                                        showHome(task.getResult().getUser().getEmail(),ProviderType.BASIC);
-                                    }
-                                    else
-                                    {
-                                        showAlert();
-                                    }
-                                }
-                            });
-                }
+                showRegistro();
             }
         });
         ingresar.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +90,11 @@ public class AuthActivity extends AppCompatActivity {
         homeIntent.putExtra("email", email);
         homeIntent.putExtra("provider", provider);
         startActivity(homeIntent);
+    }
 
+    private void showRegistro()
+    {
+        Intent registroIntent = new Intent(this, RegistroActivity.class);
+        startActivity(registroIntent);
     }
 }
