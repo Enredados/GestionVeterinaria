@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "942993828218",
+    "project_id": "petit-enredado-4to-puce",
+    "storage_bucket": "petit-enredado-4to-puce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942993828218:android:0a29033f55dbe83b378ec3",
+        "android_client_info": {
+          "package_name": "com.enredados.petit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942993828218-4iifqk15jmo5ccif7eogdvdgo5psgcrf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVFjoLA1ABnR6mqwzoOYW3FsYme8nfz5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "942993828218-4iifqk15jmo5ccif7eogdvdgo5psgcrf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

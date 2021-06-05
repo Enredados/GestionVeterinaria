@@ -1,4 +1,4 @@
-package com.example.petit;
+package com.enredados.petit;
 
 import org.junit.Test;
 
