@@ -1,12 +1,13 @@
 package com.example.petit;
 
-import androidx.appcompat.app.AppCompatActivity;
+/*import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import com.example.petit.databinding.ActivityUserBinding;
+import com.example.petit.databinding.ActivityUserBinding;*/
+//extends AppCompatActivity
 
-public class PacienteDP extends AppCompatActivity  {
-    ActivityUserBinding binding;
+public class PacienteDP  {
+    //ActivityUserBinding binding;
 
     private String codigo, nombre, especie, raza, genero, notas, mensaje;
     private double peso;
@@ -123,6 +124,7 @@ public class PacienteDP extends AppCompatActivity  {
         return pacienteMD.consultarTodosMD();
     }
      */
+    /*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,6 +145,6 @@ public class PacienteDP extends AppCompatActivity  {
             binding.countryProfile.setText(country);
             binding.profileImage.setImageResource(imageid);
         }
-    }
+    }*/
 
 }
