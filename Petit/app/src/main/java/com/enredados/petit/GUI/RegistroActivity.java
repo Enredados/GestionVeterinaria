@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,11 +38,10 @@ public class RegistroActivity extends AppCompatActivity {
         registro();
     }
 
-    public void registro()
-    {
+    public void registro() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        EditText nombre =  findViewById(R.id.nombreEditText);
+        EditText nombre = findViewById(R.id.nombreEditText);
         EditText apellido = findViewById(R.id.apellidoEditText);
         EditText cedula = findViewById(R.id.cedulaEditText);
         EditText email = findViewById(R.id.emailEditText);
@@ -57,7 +59,6 @@ public class RegistroActivity extends AppCompatActivity {
                 Map<String, Object> user = new HashMap<>();
                 user.put("nombre", nombre.getText().toString());
                 user.put("apellido", apellido.getText().toString());
-              //  user.put("cedula", cedula.getText().toString());
 
                 db.collection("VETERINARIO").document(cedula.getText().toString()).set(user);/*.addOnSuccessListener(
                         new OnSuccessListener<DocumentReference>() {
@@ -72,6 +73,17 @@ public class RegistroActivity extends AppCompatActivity {
                             showAlert();
                     }
                 });*/
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.getText().toString(), clave.getText().toString())
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    showHome(task.getResult().getUser().getEmail(), ProviderType.BASIC);
+                                } else {
+                                    showAlert();
+                                }
+                            }
+                        });
 
             }
         });
@@ -98,6 +110,7 @@ public class RegistroActivity extends AppCompatActivity {
             }
         });
     }
+
     private void showSucces() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("REGISTRO");
@@ -106,6 +119,7 @@ public class RegistroActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
     private void showAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("ERROR");
@@ -114,4 +128,12 @@ public class RegistroActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    private void showHome(String email, ProviderType provider) {
+        Intent homeIntent = new Intent(this, HomeActivity.class);
+        homeIntent.putExtra("email", email);
+        homeIntent.putExtra("provider", provider);
+        startActivity(homeIntent);
+    }
+
 }
