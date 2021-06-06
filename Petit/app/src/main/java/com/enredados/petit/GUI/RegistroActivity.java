@@ -11,11 +11,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.enredados.petit.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -76,12 +80,7 @@ public class RegistroActivity extends AppCompatActivity {
         consultar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.collection("VETERINARIO").document(cedula.getText().toString()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        nombre.setText(DocumentSnapshot.;
-                    }
-                });
+                db.collection("VETERINARIO").document(cedula.getText().toString()).get();
             }
         });
     }
