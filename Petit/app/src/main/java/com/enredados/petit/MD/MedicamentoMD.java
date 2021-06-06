@@ -29,7 +29,7 @@ public class MedicamentoMD {
         medicamentos.put("nom", nom);
         medicamentos.put("stock", stock);
 
-        db.collection("MEDICAMENTO").document(cod).set(user);/*
+        db.collection("MEDICAMENTO").document(cod).set(medicamentos)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -41,7 +41,7 @@ public class MedicamentoMD {
                     public void onFailure(@NonNull Exception e) {
                         validacion = false;
                     }
-                });*/
+                });
         return validacion;
     }
 

@@ -3,14 +3,15 @@ package com.enredados.petit.DP;
 import com.enredados.petit.MD.MedicamentoMD;
 
 public class MedicamentoDP {
-    private MedicamentoMD medicamentoMD = new MedicamentoMD();
     private String user;
     private String cod_med;
     private String tipo_med;
     private String nom_med;
     private int stock_med;
+    private MedicamentoMD medicamentoMD;
 
     public MedicamentoDP(String user, String cod_med, String tipo_med, String nom_med, int stock_med){
+        medicamentoMD = new MedicamentoMD();
         this.user = user;
         this.cod_med = cod_med;
         this.tipo_med = tipo_med;
