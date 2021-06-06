@@ -1,18 +1,25 @@
 package com.enredados.petit.DP;
 
 import java.text.DateFormat;
+import java.util.List;
 
 public class CitaDP {
 
     private String codigo;
     private DateFormat fecha;
     private String tipo;
+    private String descripcion;
     //private CitaMD citaMD;
 
     public CitaDP(String codigo, DateFormat fecha, String tipo) {
         this.codigo = codigo;
         this.fecha = fecha;
         this.tipo = tipo;
+    }
+
+    public CitaDP(String descripcion, DateFormat fecha){
+        this.fecha = fecha;
+        this.descripcion = descripcion;
     }
 
     /*
@@ -43,6 +50,15 @@ public class CitaDP {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public String getDescripcion(){ return descripcion; }
+
+    public void setDescripcion(String descripcion){ this.descripcion = descripcion; }
+
+    public List<CitaDP> consultarTodasDescripciones(){
+        return null;
+        //return citaMD.consultarTodasDescripciones();
     }
 
     /*
