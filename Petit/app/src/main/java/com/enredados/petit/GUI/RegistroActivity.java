@@ -19,10 +19,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegistroActivity extends AppCompatActivity {
+
+    private ArrayList<String> aux = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +99,9 @@ public class RegistroActivity extends AppCompatActivity {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         nombre.setText(document.getId().toString());
                                         apellido.setText(document.get("apellido").toString());
+                                        aux.add(document.get("nombre").toString());
+                                        aux.add(document.get("apellido").toString());
+
                                     }
                                 } else {
                                     showAlert();
