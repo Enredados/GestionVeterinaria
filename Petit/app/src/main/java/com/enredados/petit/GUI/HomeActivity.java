@@ -27,4 +27,9 @@ public class HomeActivity extends AppCompatActivity {
         Intent dueno = new Intent(this, dueno.class);
         startActivity(dueno);
     }
+
+    public void abrirMedi(View vista){
+        Intent dueno = new Intent(this, IngresoMed.class);
+        startActivity(dueno);
+    }
 }
