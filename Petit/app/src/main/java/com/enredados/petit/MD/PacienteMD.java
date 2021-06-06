@@ -1,6 +1,53 @@
 package com.enredados.petit.MD;
+import androidx.annotation.NonNull;
+
+import com.enredados.petit.DP.PacienteDP;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PacienteMD {
+    private PacienteDP pacienteDP;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    boolean validacion;
+
+    public PacienteMD (){
+    }
+    public PacienteMD(PacienteDP pacienteDP){
+        this.pacienteDP = pacienteDP;
+    }
+
+    public boolean insertarMD(){
+
+        Map<String, Object> pacientes = new HashMap<>();
+        pacientes.put("codigo", pacienteDP.getCodigo());
+        pacientes.put("nombre", pacienteDP.getNombre());
+        pacientes.put("especie", pacienteDP.getEspecie());
+        pacientes.put("raza", pacienteDP.getRaza());
+        pacientes.put("genero",pacienteDP.getGenero());
+        pacientes.put("peso", pacienteDP.getPeso());
+        pacientes.put("edad",pacienteDP.getEdad());
+
+
+        db.collection("PACIENTE").document(pacienteDP.getCodigo())
+                .set(pacientes)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        validacion = true;
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        validacion = false;
+                    }
+                });
+        return validacion;
+    }
     /*
     private EditText et1, et2, et3, et4;
 
