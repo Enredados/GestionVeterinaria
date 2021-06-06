@@ -100,8 +100,7 @@ public class RegistroActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         nombre.setText(document.get("nombre").toString());
-                                        apellido.setText(document.get("nombre").toString());
-
+                                        apellido.setText(document.get("apellido").toString());
                                     }
                                 } else {
                                     showAlert();
