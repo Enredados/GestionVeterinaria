@@ -15,9 +15,5 @@ public class registro_dueno extends AppCompatActivity {
         setContentView(R.layout.activity_registro_dueno);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar();
-        getSupportActionBar().setTitle("HOla");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }
