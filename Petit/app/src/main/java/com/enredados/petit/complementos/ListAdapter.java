@@ -45,8 +45,6 @@ public class ListAdapter extends ArrayAdapter<Modelo> {
         TextView fechaTipo = view.findViewById(R.id.txtFecha);
         textoTipo.setText(modelo.getFecha().toString());
 
-
-
         return view;
     }
 }

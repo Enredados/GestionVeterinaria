@@ -12,6 +12,10 @@ public class Modelo {
         this.fecha = fecha;
     }
 
+    public Modelo(){
+
+    }
+
     public String getTipo() {
         return tipo;
     }
