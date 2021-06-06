@@ -80,7 +80,21 @@ public class RegistroActivity extends AppCompatActivity {
         consultar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.collection("VETERINARIO").document(cedula.getText().toString()).get();
+                db.collection("VETERINARIO")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        nombre.setText(document.get("nombre").toString());
+                                        apellido.setText(document.get("apellido").toString());
+                                    }
+                                } else {
+                                    showAlert();
+                                }
+                            }
+                        });
             }
         });
     }
