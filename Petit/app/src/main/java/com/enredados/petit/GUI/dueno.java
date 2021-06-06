@@ -8,23 +8,17 @@ import android.view.View;
 
 import com.enredados.petit.R;
 
-enum ProviderType{
-    BASIC
-}
-
-public class HomeActivity extends AppCompatActivity {
-
-    public HomeActivity() {};
+public class dueno extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        //Setup
+        setContentView(R.layout.activity_dueno);
     }
 
-    public void abrirDueno(View vista){
-        Intent dueno = new Intent(this, dueno.class);
-        startActivity(dueno);
+    public void abrirOtro(View vista){
+        Intent registro = new Intent(this, registro_dueno.class);
+        startActivity(registro);
+
     }
 }
