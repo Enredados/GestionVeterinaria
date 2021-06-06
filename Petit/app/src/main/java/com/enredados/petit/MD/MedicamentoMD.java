@@ -14,25 +14,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MedicamentoMD {
-    private MedicamentoDP medicamento;
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     boolean validacion;
 
     public MedicamentoMD (){
     }
-    public MedicamentoMD(MedicamentoDP medicamento){
-        this.medicamento = medicamento;
-    }
 
-    public boolean insertar(){
+    public boolean insertar(String cod, String user, String tipo, String nom, int stock){
 
         Map<String, Object> medicamentos = new HashMap<>();
-        medicamentos.put("user", medicamento.getUser());
-        medicamentos.put("tipo_med", medicamento.getTipoMed());
-        medicamentos.put("nom_med", medicamento.getNomMed());
-        medicamentos.put("stock_med", medicamento.getStockMed());
+        medicamentos.put("user", user);
+        medicamentos.put("tipo_med", tipo);
+        medicamentos.put("nom_med", nom);
+        medicamentos.put("stock_med", stock);
 
-        db.collection("MEDICAMENTO").document(medicamento.getCodMed())
+        db.collection("MEDICAMENTO").document(cod)
                 .set(medicamentos)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

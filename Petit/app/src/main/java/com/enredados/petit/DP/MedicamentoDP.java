@@ -1,6 +1,9 @@
 package com.enredados.petit.DP;
 
+import com.enredados.petit.MD.MedicamentoMD;
+
 public class MedicamentoDP {
+    private MedicamentoMD medicamentoMD = new MedicamentoMD();
     private String user;
     private String cod_med;
     private String tipo_med;
@@ -46,6 +49,9 @@ public class MedicamentoDP {
     }
     public int getStockMed(){
         return this.stock_med;
+    }
+    public boolean guardarMed(){
+        return medicamentoMD.insertar(cod_med, user, tipo_med, nom_med, stock_med);
     }
 
 }
