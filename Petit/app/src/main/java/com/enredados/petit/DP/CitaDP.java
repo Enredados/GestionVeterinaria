@@ -56,7 +56,7 @@ public class CitaDP {
 
     public void setDescripcion(String descripcion){ this.descripcion = descripcion; }
 
-    public List<CitaDP> consultarTodasDescripciones(){
+    public List<CitaDP> consultarHistorialCitas(){
         return null;
         //return citaMD.consultarTodasDescripciones();
     }
