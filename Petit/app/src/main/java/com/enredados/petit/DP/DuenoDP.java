@@ -1,7 +1,12 @@
 package com.enredados.petit.DP;
 
+import com.enredados.petit.MD.DuenoMD;
+
+import java.util.ArrayList;
+
 public class DuenoDP {
-    private String _idDueno;
+    private DuenoMD duenoMD;
+    private String _cedula;
     private String _nombre;
     private String _apellido;
     private String _domicilio;
@@ -9,23 +14,25 @@ public class DuenoDP {
     private String _celular;
 
     public DuenoDP(){
+        duenoMD =new DuenoMD();
     }
 
-    public DuenoDP(String idDueno, String nombre, String apellido, String domicilio, String ciudad, String celular) {
-        _idDueno = idDueno;
+    public DuenoDP(String cedula, String nombre, String apellido, String domicilio, String ciudad, String celular) {
+        _cedula = cedula;
         _nombre = nombre;
         _apellido = apellido;
         _domicilio = domicilio;
         _ciudad = ciudad;
         _celular = celular;
+        duenoMD =new DuenoMD();
     }
 
-    public String getID(){
-        return _idDueno;
+    public String getCedula(){
+        return _cedula;
     }
 
-    public void setID(String idDueno){
-        _idDueno = idDueno;
+    public void setCedula(String idDueno){
+        _cedula = idDueno;
     }
 
     public void setNombre(String nombre){
@@ -66,5 +73,12 @@ public class DuenoDP {
 
     public String getCelular(){
         return _celular;
+    }
+
+    public boolean guardarDueno(){
+        return duenoMD.insertar(_cedula,_nombre,_apellido,_domicilio,_ciudad,_celular);
+    }
+    public ArrayList<DuenoDP> ConsultaGeneral(){
+        return duenoMD.consultaGeneral();
     }
 }

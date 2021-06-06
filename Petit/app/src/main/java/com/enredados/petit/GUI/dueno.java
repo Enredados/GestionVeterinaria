@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.enredados.petit.DP.DuenoDP;
+import com.enredados.petit.MD.DuenoMD;
 import com.enredados.petit.R;
 
 import java.util.ArrayList;
@@ -21,21 +23,20 @@ public class dueno extends AppCompatActivity {
         setContentView(R.layout.activity_dueno);
 
         listview = (ListView) findViewById(R.id.listviev);
+        DuenoDP duenoDP = new DuenoDP();
+        ArrayList<DuenoDP> duenos = duenoDP.ConsultaGeneral();
+        ArrayList<String> nombres = new ArrayList<String>();
 
-        ArrayList<String> prueba = new ArrayList<>();
-        prueba.add("Android");
-        prueba.add("IS");
-        prueba.add("Great");
-        prueba.add("AND");
-        prueba.add("I");
-        prueba.add("Am");
-        prueba.add("Not");
-        prueba.add("Gringo");
-        prueba.add("A");
-        prueba.add("Isaac");
-        prueba.add("ZOrro");
+        if(duenos.size()>0){
+            for(DuenoDP dueno : duenos){
+                nombres.add(dueno.getApellido()+", "+dueno.getNombre());
+            }
+        }else{
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,prueba);
+        }
+
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,nombres);
 
         listview.setAdapter(arrayAdapter);
     }
