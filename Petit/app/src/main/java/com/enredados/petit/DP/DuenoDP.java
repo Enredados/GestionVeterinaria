@@ -1,18 +1,31 @@
 package com.enredados.petit.DP;
 
 public class DuenoDP {
+    private String _idDueno;
     private String _nombre;
     private String _apellido;
     private String _domicilio;
     private String _ciudad;
     private String _celular;
 
-    public DuenoDP(String nombre, String apellido, String domicilio, String ciudad, String celular) {
+    public DuenoDP(){
+    }
+
+    public DuenoDP(String idDueno, String nombre, String apellido, String domicilio, String ciudad, String celular) {
+        _idDueno = idDueno;
         _nombre = nombre;
         _apellido = apellido;
         _domicilio = domicilio;
         _ciudad = ciudad;
         _celular = celular;
+    }
+
+    public String getID(){
+        return _idDueno;
+    }
+
+    public void setID(String idDueno){
+        _idDueno = idDueno;
     }
 
     public void setNombre(String nombre){

@@ -9,16 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Petit">
-        <activity android:name=".GUI.HistorialCitasActivity"></activity>
-        <activity android:name=".GUI.RegistroActivity" />
-        <activity android:name=".GUI.HomeActivity" />
+        <activity android:name=".GUI.dueno"
+            android:label="Clientes"
+            android:parentActivityName=".GUI.HomeActivity"
+            />
+        <activity
+            android:name=".GUI.registro_dueno"
+            android:label="Agregar Cliente"
+            android:parentActivityName=".GUI.dueno"/>
+        <activity android:name=".GUI.RegistroActivity"
+            android:parentActivityName=".GUI.AuthActivity"
+            />
+        <activity android:name=".GUI.HomeActivity"
+            android:label="Menú Principal"
+            />
         <activity android:name=".GUI.AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".GUI.IngresoMed"
+            android:parentActivityName=".GUI.HomeActivity"/>
     </application>
 
 </manifest>
