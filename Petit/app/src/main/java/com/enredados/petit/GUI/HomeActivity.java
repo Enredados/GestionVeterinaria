@@ -14,7 +14,9 @@ enum ProviderType{
 
 public class HomeActivity extends AppCompatActivity {
 
-    public HomeActivity() {};
+    public HomeActivity() {
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,5 +28,10 @@ public class HomeActivity extends AppCompatActivity {
     public void abrirDueno(View vista){
         Intent dueno = new Intent(this, dueno.class);
         startActivity(dueno);
+    }
+
+    public void abrirMedi(View vista){
+        Intent medic = new Intent(this, IngresoMed.class);
+        startActivity(medic);
     }
 }
