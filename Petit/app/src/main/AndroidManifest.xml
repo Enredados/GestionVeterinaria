@@ -13,12 +13,13 @@
         <activity
             android:name=".GUI.registro_dueno"
             android:parentActivityName=".GUI.dueno"/>
-        <activity android:name=".GUI.RegistroActivity"/>
+        <activity android:name=".GUI.RegistroActivity"
+            android:parentActivityName=".GUI.AuthActivity"
+            />
         <activity android:name=".GUI.HomeActivity" />
         <activity android:name=".GUI.AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
