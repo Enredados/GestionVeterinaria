@@ -59,7 +59,6 @@ public class RegistroActivity extends AppCompatActivity {
                 Map<String, Object> user = new HashMap<>();
                 user.put("nombre", nombre.getText().toString());
                 user.put("apellido", apellido.getText().toString());
-                //  user.put("cedula", cedula.getText().toString());
 
                 db.collection("VETERINARIO").document(cedula.getText().toString()).set(user);/*.addOnSuccessListener(
                         new OnSuccessListener<DocumentReference>() {
@@ -74,7 +73,7 @@ public class RegistroActivity extends AppCompatActivity {
                             showAlert();
                     }
                 });*/
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(email.getText().toString(), clave.getText().toString())
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.getText().toString(), clave.getText().toString())
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -85,6 +84,7 @@ public class RegistroActivity extends AppCompatActivity {
                                 }
                             }
                         });
+
             }
         });
 
@@ -100,8 +100,7 @@ public class RegistroActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         nombre.setText(document.get("nombre").toString());
-                                        apellido.setText(document.get("nombre").toString());
-
+                                        apellido.setText(document.get("apellido").toString());
                                     }
                                 } else {
                                     showAlert();
@@ -136,4 +135,5 @@ public class RegistroActivity extends AppCompatActivity {
         homeIntent.putExtra("provider", provider);
         startActivity(homeIntent);
     }
+
 }
