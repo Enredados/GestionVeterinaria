@@ -22,6 +22,13 @@ public class CitaDP {
         this.descripcion = descripcion;
     }
 
+    public CitaDP(String codigo, DateFormat fecha, String tipo, String descripcion) {
+        this.codigo = codigo;
+        this.fecha = fecha;
+        this.tipo = tipo;
+        this.descripcion = descripcion;
+    }
+
     /*
     public CitaDP() {
         citaMD = new CitaMD(this);
