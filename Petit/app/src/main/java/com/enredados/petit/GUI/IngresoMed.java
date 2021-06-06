@@ -21,29 +21,27 @@ public class IngresoMed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ingreso_med);
 
+
         registro();
     }
 
     public void registro() {
         Button agregar = findViewById(R.id.AgregarMed);
-
+        EditText cod = findViewById(R.id.CodigoMed);
+        EditText tip = findViewById(R.id.TipoMed);
+        EditText nom = findViewById(R.id.NombreMed);
+        EditText st = findViewById(R.id.stockMed);
         setTitle("REGISTRO");
 
         agregar.setOnClickListener(new View.OnClickListener() {
-            // EditText us =  findViewById(R.id.UsuarioMed);
-            EditText cod = findViewById(R.id.CodigoMed);
-            EditText tip = findViewById(R.id.TipoMed);
-            EditText nom = findViewById(R.id.NombreMed);
-            EditText st = findViewById(R.id.StockMed);
-//        String usuario = us.getText().toString();
 
-            String usuario = usr.getEmail();
-            String codigo = cod.getText().toString();
-            String tipo = tip.getText().toString();
-            String nombre = nom.getText().toString();
-            int stock = Integer.parseInt(st.getText().toString());
             @Override
             public void onClick(View v) {
+                String usuario = usr.getEmail().toString();
+                String codigo = cod.getText().toString();
+                String tipo = tip.getText().toString();
+                String nombre = nom.getText().toString();
+                int stock = Integer.parseInt(st.getText().toString());
 
                 MedicamentoDP medicamento = new MedicamentoDP(usuario, codigo, tipo, nombre, stock);
                 if (medicamento.guardarMed()) {

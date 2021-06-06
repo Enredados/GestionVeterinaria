@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.enredados.petit.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 enum ProviderType{
     BASIC

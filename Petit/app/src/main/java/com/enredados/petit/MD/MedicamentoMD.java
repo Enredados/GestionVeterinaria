@@ -16,21 +16,20 @@ import java.util.Map;
 public class MedicamentoMD {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    boolean validacion;
+    boolean validacion = true;
 
     public MedicamentoMD (){
     }
 
-    public boolean insertar(String cod, String user, String tipo, String nom, int stock){
+    public boolean insertar(String cod, String user, String tip, String nom, int stock){
 
         Map<String, Object> medicamentos = new HashMap<>();
         medicamentos.put("user", user);
-        medicamentos.put("tipo_med", tipo);
-        medicamentos.put("nom_med", nom);
-        medicamentos.put("stock_med", stock);
+        medicamentos.put("tipo", tip);
+        medicamentos.put("nom", nom);
+        medicamentos.put("stock", stock);
 
-        db.collection("MEDICAMENTO").document(cod)
-                .set(medicamentos)
+        db.collection("MEDICAMENTO").document(cod).set(user);/*
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -42,7 +41,7 @@ public class MedicamentoMD {
                     public void onFailure(@NonNull Exception e) {
                         validacion = false;
                     }
-                });
+                });*/
         return validacion;
     }
 
