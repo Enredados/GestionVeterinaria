@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#313239"
+    android:background="#414145"
     tools:context=".GUI.AuthActivity">
 
     <LinearLayout
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/nombreEditText"
+            android:id="@+id/authLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -42,6 +42,10 @@
             android:inputType="textPassword"
             android:textColor="#FFFFFF"
             android:textColorHint="#FFFFFF" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,6 +69,24 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Acceder" />
+
         </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="4dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/googleButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:backgroundTint="#FFFFFF"
+            android:onClick="googleSignIn"
+            android:text="Button"
+            android:textColor="@color/black" />
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

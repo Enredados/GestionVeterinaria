@@ -1,6 +1,5 @@
 package com.enredados.petit.GUI;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -9,14 +8,9 @@ import android.widget.Spinner;
 import com.enredados.petit.DP.PacienteDP;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.enredados.petit.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class IngresoPacienteActivity extends AppCompatActivity {
 
@@ -33,7 +27,7 @@ public class IngresoPacienteActivity extends AppCompatActivity {
     }
     public void ingreso(){
         codigo = (EditText) findViewById(R.id.codigoEditText);
-        nombre = (EditText) findViewById(R.id.nombreEditText);
+        nombre = (EditText) findViewById(R.id.authLayout);
         raza = (EditText) findViewById(R.id.razaEditText);
         peso = (EditText) findViewById(R.id.pesoEditText);
         edad = (EditText) findViewById(R.id.edadEditText);

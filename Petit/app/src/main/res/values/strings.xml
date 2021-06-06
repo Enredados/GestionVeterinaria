@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Petit</string>
     <string name="email">Email</string>
+    <string name="prefs_file">com.enredados.petit.PREFERENCE_FILE_KEY</string>
 </resources>
