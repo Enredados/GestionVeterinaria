@@ -12,12 +12,17 @@ import android.widget.EditText;
 
 import com.enredados.petit.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,29 +30,36 @@ import java.util.Map;
 
 public class RegistroActivity extends AppCompatActivity {
 
-    private ArrayList<String> aux = new ArrayList<>();
+    private FirebaseFirestore db;
+
+    private EditText nombre;
+    private EditText apellido;
+    private EditText cedula;
+    private EditText email;
+    private EditText clave;
+
+    private Button registro;
+    private Button consultar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
+        db = FirebaseFirestore.getInstance();
+        nombre = findViewById(R.id.authLayout);
+        apellido = findViewById(R.id.apellidoEditText);
+        cedula = findViewById(R.id.cedulaEditText);
+        email = findViewById(R.id.emailEditText);
+        clave = findViewById(R.id.passwordEditText);
+
+        registro = findViewById(R.id.registrar);
+        consultar = findViewById(R.id.consulta);
         //registro
         registro();
     }
 
     public void registro() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        EditText nombre = findViewById(R.id.authLayout);
-        EditText apellido = findViewById(R.id.apellidoEditText);
-        EditText cedula = findViewById(R.id.cedulaEditText);
-        EditText email = findViewById(R.id.emailEditText);
-        EditText clave = findViewById(R.id.passwordEditText);
-
-        Button registro = findViewById(R.id.registrar);
-        Button consultar = findViewById(R.id.consulta);
-
 
         setTitle("REGISTRO");
 
@@ -57,59 +69,31 @@ public class RegistroActivity extends AppCompatActivity {
                 Map<String, Object> user = new HashMap<>();
                 user.put("nombre", nombre.getText().toString());
                 user.put("apellido", apellido.getText().toString());
-
-                db.collection("VETERINARIO").document(cedula.getText().toString()).set(user);/*.addOnSuccessListener(
-                        new OnSuccessListener<DocumentReference>() {
-
+                user.put("id", cedula.getText().toString());
+                db.collection("VETERINARIO").document(email.getText().toString()).set(user)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
-                            public void onSuccess(DocumentReference documentReference) {
+                            public void onComplete(@NonNull @NotNull Task<Void> task) {
+
+                                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.getText().toString(), clave.getText().toString())
+                                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                if (task.isSuccessful()) {
+                                                    showHome(task.getResult().getUser().getEmail(), ProviderType.BASIC);
+                                                } else {
+                                                    showAlert();
+                                                }
+                                            }
+                                        });
+
                                 showSucces();
                             }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull @org.jetbrains.annotations.NotNull Exception e) {
-                            showAlert();
-                    }
-                });*/
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.getText().toString(), clave.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    showHome(task.getResult().getUser().getEmail(), ProviderType.BASIC);
-                                } else {
-                                    showAlert();
-                                }
-                            }
-                        });
-
-            }
-        });
-
-
-        consultar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                db.collection("VETERINARIO")
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        nombre.setText(document.getId().toString());
-                                        apellido.setText(document.get("apellido").toString());
-                                        aux.add(document.get("nombre").toString());
-                                        aux.add(document.get("apellido").toString());
-
-                                    }
-                                } else {
-                                    showAlert();
-                                }
-                            }
                         });
             }
         });
+
+
     }
 
     private void showSucces() {
