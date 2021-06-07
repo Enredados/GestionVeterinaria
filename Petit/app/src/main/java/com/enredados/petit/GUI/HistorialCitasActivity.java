@@ -34,14 +34,33 @@ public class HistorialCitasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_historial_citas);
 
         lvItems = (ListView) findViewById(R.id.lvItems);
+        ArrayList items = getArrayItems();
         adaptador = new Adaptador(getArrayItems(), this);
         lvItems.setAdapter(adaptador);
+
+        // para ver la actividad descripcion
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent visorDescripcion = new Intent(view.getContext(), VisorDescripcion.class);
+
+                Modelo temp = (Modelo) items.get(position);
+                Toast.makeText(HistorialCitasActivity.this, "presionado: "+temp.getTipo(), Toast.LENGTH_SHORT).show();
+
+                visorDescripcion.putExtra("tipo", ((Modelo) items.get(position)).getTipo());
+                visorDescripcion.putExtra("fecha", ((Modelo) items.get(position)).getFecha());
+                visorDescripcion.putExtra("descripcion", ((Modelo) items.get(position)).getDescripcion());
+                visorDescripcion.putExtra("imagen", R.mipmap.ic_launcher_round);
+                startActivity(visorDescripcion);
+            }
+        });
     }
 
+    // este metdodo tiene que interactuar con el dp y traer lodas las citas de la db
     private ArrayList<Modelo> getArrayItems(){
         ArrayList<Modelo> listItems = new ArrayList<>();
         Date now = new Date();
-        String mensaje = "todo bien con el perro firulais, tiene cuatro patas y puede correr muy pero muy rapido. Además se le cortó el pelo y se le hizo un buen pedicure";
+        String mensaje = "todo bien con el perro, tiene rabia y kobik";
 
         listItems.add(new Modelo("Medica", mensaje, DateFormat.getTimeInstance(DateFormat.SHORT).format(now)));
         listItems.add(new Modelo("Peluqueria", "sin observaciones", DateFormat.getTimeInstance(DateFormat.SHORT).format(now)));

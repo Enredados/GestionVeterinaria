@@ -42,6 +42,8 @@ public class Adaptador extends BaseAdapter {
         Modelo item = (Modelo) getItem(position);
 
         convertView = LayoutInflater.from(context).inflate(R.layout.item_row, null);
+
+        // componentes de la GUI
         ImageView imgFoto = (ImageView) convertView.findViewById(R.id.imgFoto);
         TextView tvTipo = (TextView)  convertView.findViewById(R.id.tvTipo);
         TextView tvFecha = (TextView)  convertView.findViewById(R.id.tvFecha);
