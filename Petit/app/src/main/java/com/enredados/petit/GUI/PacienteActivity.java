@@ -24,15 +24,21 @@ public class PacienteActivity extends AppCompatActivity {
 
         if (intent != null){
 
-            String name = intent.getStringExtra("name");
-            String phone = intent.getStringExtra("phone");
-            String country = intent.getStringExtra("country");
-            int imageid = intent.getIntExtra("imageid", R.drawable.baloo);
+            String nombre = intent.getStringExtra("nombre");
+            String especie = intent.getStringExtra("especie");
+            String raza = intent.getStringExtra("raza");
+            String genero = intent.getStringExtra("genero");
+            String peso = intent.getStringExtra("peso");
+            String edad = intent.getStringExtra("edad");
+            int imagenId = intent.getIntExtra("imagenId", R.drawable.baloo);
 
-            binding.nameProfile.setText(name);
-            binding.phoneProfile.setText(phone);
-            binding.countryProfile.setText(country);
-            binding.profileImage.setImageResource(imageid);
+            binding.nombreProfile.setText(nombre);
+            binding.especieProfile.setText(especie);
+            binding.razaProfile.setText(raza);
+            binding.generoProfile.setText(genero);
+            binding.pesoProfile.setText(peso);
+            binding.edadProfile.setText(edad);
+            binding.profileImagen.setImageResource(imagenId);
 
 
         }

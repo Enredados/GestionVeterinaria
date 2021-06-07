@@ -10,9 +10,11 @@ import com.enredados.petit.DP.PacienteDP;
 import com.enredados.petit.databinding.ActivityListViewBinding;
 
 import java.util.ArrayList;
+import com.enredados.petit.MD.PacienteMD;
 
 public class PacienteGUI extends AppCompatActivity{
     ActivityListViewBinding binding;
+    private PacienteMD pacienteMD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,25 +41,30 @@ public class PacienteGUI extends AppCompatActivity{
             userArrayList.add(user);
 
         }
-
-
-        ItemListaActivity itemListaActivity = new ItemListaActivity(PacienteGUI.this,userArrayList);
+*/
+        ArrayList<PacienteDP> pacientes = new ArrayList<PacienteDP>();
+        pacientes = pacienteMD.consultaGeneralMD();
+        ItemListaActivity itemListaActivity = new ItemListaActivity(PacienteGUI.this,pacientes);
 
         binding.listview.setAdapter(itemListaActivity);
         binding.listview.setClickable(true);
+        ArrayList<PacienteDP> finalPacientes = pacientes;
         binding.listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent i = new Intent(PacienteGUI.this, PacienteDP.class);
-                i.putExtra("name",name[position]);
-                i.putExtra("phone",phoneNo[position]);
-                i.putExtra("country",country[position]);
-                i.putExtra("imageid",imageId[position]);
+                Intent i = new Intent(PacienteGUI.this, PacienteActivity.class);
+                i.putExtra("nombre", finalPacientes.get(position).getNombre());
+                i.putExtra("especie", finalPacientes.get(position).getEspecie());
+                i.putExtra("raza", finalPacientes.get(position).getRaza());
+                i.putExtra("genero", finalPacientes.get(position).getGenero());
+                i.putExtra("peso", finalPacientes.get(position).getPeso());
+                i.putExtra("edad", finalPacientes.get(position).getEdad());
+                i.putExtra("imagenId", finalPacientes.get(position).getImagenId());
                 startActivity(i);
 
             }
-        });*/
+        });
 
     }
 }
