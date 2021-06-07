@@ -91,12 +91,9 @@ public class AuthActivity extends AppCompatActivity {
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if(task.isSuccessful())
-                                    {
-                                        showHome(task.getResult().getUser().getEmail(),ProviderType.BASIC);
-                                    }
-                                    else
-                                    {
+                                    if (task.isSuccessful()) {
+                                        showHome(task.getResult().getUser().getEmail(), ProviderType.BASIC);
+                                    } else {
                                         showAlert();
                                     }
                                 }
@@ -106,14 +103,13 @@ public class AuthActivity extends AppCompatActivity {
         });
     }
 
-    public void googleSignIn(View view)
-    {
+    public void googleSignIn(View view) {
         GoogleSignInOptions googleConf = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail().build();
 
         GoogleSignInClient googleClient = GoogleSignIn.getClient(this, googleConf);
-       // googleClient.signOut();
+        // googleClient.signOut();
 
         startActivityForResult(googleClient.getSignInIntent(), GOOGLE_SIGN_IN);
     }
@@ -135,19 +131,17 @@ public class AuthActivity extends AppCompatActivity {
         startActivity(homeIntent);
     }
 
-    private void showRegistro()
-    {
+    private void showRegistro() {
         Intent registroIntent = new Intent(this, RegistroActivity.class);
         startActivity(registroIntent);
     }
 
-    private void sesion(){
+    private void sesion() {
         pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
         String email = pref.getString("email", null);
         String provider = pref.getString("provider", null);
 
-        if(email != null && provider != null)
-        {
+        if (email != null && provider != null) {
             authLayout.setVisibility(View.INVISIBLE);
             showHome(email, ProviderType.valueOf(provider));
         }
@@ -158,28 +152,27 @@ public class AuthActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == GOOGLE_SIGN_IN)
-        {
+        if (requestCode == GOOGLE_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                if(account != null)
-                {
-                    AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-                    FirebaseAuth.getInstance().signInWithCredential(credential);
+            handleSignInResult(task);
+        }
+    }
 
-                    if(task.isSuccessful())
-                    {
-                        showHome(account.getEmail(),ProviderType.GOOGLE);
-                    }
-                    else
-                    {
-                        showAlert();
-                    }
+    private void handleSignInResult(Task<GoogleSignInAccount> task) {
+        try {
+            GoogleSignInAccount account = task.getResult(ApiException.class);
+            if (account != null) {
+                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+                FirebaseAuth.getInstance().signInWithCredential(credential);
+
+                if (task.isSuccessful()) {
+                    showHome(account.getEmail(), ProviderType.GOOGLE);
+                } else {
+                    showAlert();
                 }
-            } catch (ApiException e) {
-                e.printStackTrace();
             }
+        } catch (ApiException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "942993828218",
+    "firebase_url": "https://petit-enredado-4to-puce-default-rtdb.firebaseio.com",
     "project_id": "petit-enredado-4to-puce",
     "storage_bucket": "petit-enredado-4to-puce.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "942993828218-5v7g88nm9nh11c3ho1p9lp1bbogjv8mo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.enredados.petit",
+            "certificate_hash": "513a3b369965dab40d7ae686164a5c73554fadb0"
+          }
+        },
         {
           "client_id": "942993828218-4iifqk15jmo5ccif7eogdvdgo5psgcrf.apps.googleusercontent.com",
           "client_type": 3
