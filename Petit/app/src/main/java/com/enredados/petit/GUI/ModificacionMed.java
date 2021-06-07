@@ -4,72 +4,61 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import com.enredados.petit.DP.MedicamentoDP;
 import com.enredados.petit.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class IngresoMed extends AppCompatActivity {
+public class ModificacionMed extends AppCompatActivity {
 
     FirebaseFirestore db;
     FirebaseUser usr = FirebaseAuth.getInstance().getCurrentUser();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ingreso_med);
-        db = FirebaseFirestore.getInstance();
-        Button agregar = findViewById(R.id.AgregarMed);
-        EditText cod = findViewById(R.id.CodigoMed);
-        EditText tip = findViewById(R.id.TipoMed);
-        EditText nom = findViewById(R.id.NombreMed);
-        EditText st = findViewById(R.id.stockMed);
-        setTitle("INGRESO MEDICAMENTOS");
+        setContentView(R.layout.activity_modificacion_med);
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            setTitle("MODIFICAR "+bundle.getString("NombreMed"));
+        }
 
-        agregar.setOnClickListener(new View.OnClickListener() {
+        db = FirebaseFirestore.getInstance();
+        Button modificar = findViewById(R.id.btnModificar);
+        EditText tip = findViewById(R.id.txtTipo);
+        EditText nom = findViewById(R.id.txtNombre);
+        EditText st = findViewById(R.id.numStock);
+        consultaParametro(bundle.getString("NombreMed"));
+        modificar.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 String usuario = usr.getEmail().toString();
-                String codigo = cod.getText().toString();
+                String codigo = bundle.getString("NombreMed");
                 String tipo = tip.getText().toString();
                 String nombre = nom.getText().toString();
+                //String stck[] = st.getText().toString().split(" ");
+                //System.out.println("STOCK: "+stck[0]);
                 double stock = Double.parseDouble(st.getText().toString());
 
                 MedicamentoDP medicamento = new MedicamentoDP(usuario, codigo, tipo, nombre, stock);
                 insertar(medicamento);
+                consultaParametro(medicamento.getCodMed());
             }
         });
     }
-
-    public void ventanaConsultaParametro(View view){
-        Intent siguiente = new Intent(this, ConsultaParametroMed.class);
-        startActivity(siguiente);
-    }
-    public void ventanaConsultaGeneral(View view){
-        Intent siguiente = new Intent(this, ConsultaGeneralMed.class);
-        startActivity(siguiente);
-    }
-    public void ventanaEliminar(View view){
-        Intent siguiente = new Intent(this, EliminarMed.class);
-        startActivity(siguiente);
-    }
-    public void ventanaModificar(View view){
-        Intent siguiente = new Intent(this, ModificarMed.class);
-        startActivity(siguiente);
-    }
-
     private void insertar(MedicamentoDP medicamento){
 
         Map<String, Object> medicamentos = new HashMap<>();
@@ -92,11 +81,42 @@ public class IngresoMed extends AppCompatActivity {
                     }
                 });
     }
+    private void consultaParametro(String cod) {
+
+        db.collection("MEDICAMENTO").document(cod).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    MedicamentoDP medicamento = new MedicamentoDP();
+
+
+                    if(documentSnapshot.contains("nom")){
+                        medicamento.setNomMed(documentSnapshot.getString("nom")) ;
+                    }
+                    if(documentSnapshot.contains("stock")){
+                        medicamento.setStockMed(documentSnapshot.getDouble("stock"));
+                    }
+                    if(documentSnapshot.contains("tipo")){
+                        medicamento.setTipoMed( documentSnapshot.getString("tipo"));
+                    }
+                    if(documentSnapshot.contains("user")){
+                        medicamento.setUser(documentSnapshot.getString("user"));
+                    }
+                    EditText tipo = findViewById(R.id.txtTipo);
+                    EditText nombre = findViewById(R.id.txtNombre);
+                    EditText stock = findViewById(R.id.numStock);
+                    tipo.setText(medicamento.getTipoMed());
+                    nombre.setText(medicamento.getNomMed());
+                    stock.setText(""+medicamento.getStockMed());
+                }
+            }
+        });
+    }
 
     private void showSucces() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("REGISTRO");
-        builder.setMessage("Se ha ingresado el medicamento de manera exitosa ");
+        builder.setTitle("MODIFICACIÓN");
+        builder.setMessage("Se ha modificado el medicamento de manera exitosa ");
         builder.setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -105,7 +125,7 @@ public class IngresoMed extends AppCompatActivity {
     private void showAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("ERROR");
-        builder.setMessage("No se a podido ingresar el medicamento ");
+        builder.setMessage("No se a podido modificar el medicamento ");
         builder.setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();

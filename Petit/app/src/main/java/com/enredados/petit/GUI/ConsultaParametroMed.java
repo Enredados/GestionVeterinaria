@@ -42,12 +42,12 @@ public class ConsultaParametroMed extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()) {
                     MedicamentoDP medicamento = new MedicamentoDP();
-                    double stck=0;
+
                     if(documentSnapshot.contains("nom")){
                         medicamento.setNomMed(documentSnapshot.getString("nom")) ;
                     }
                     if(documentSnapshot.contains("stock")){
-                       stck = documentSnapshot.getDouble("stock");
+                       medicamento.setStockMed(documentSnapshot.getDouble("stock"));
                     }
                     if(documentSnapshot.contains("tipo")){
                         medicamento.setTipoMed( documentSnapshot.getString("tipo"));
@@ -62,7 +62,7 @@ public class ConsultaParametroMed extends AppCompatActivity {
                     user.setText(medicamento.getUser());
                     tipo.setText(medicamento.getTipoMed());
                     nombre.setText(medicamento.getNomMed());
-                    stock.setText(""+stck);
+                    stock.setText(""+medicamento.getStockMed());
                 }
             }
         });

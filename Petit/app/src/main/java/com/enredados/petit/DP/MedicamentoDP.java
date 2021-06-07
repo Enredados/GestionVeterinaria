@@ -7,10 +7,10 @@ public class MedicamentoDP {
     private String cod_med;
     private String tipo_med;
     private String nom_med;
-    private int stock_med;
+    private double stock_med;
     private MedicamentoMD medicamentoMD;
 
-    public MedicamentoDP(String user, String cod_med, String tipo_med, String nom_med, int stock_med){
+    public MedicamentoDP(String user, String cod_med, String tipo_med, String nom_med, double stock_med){
         medicamentoMD = new MedicamentoMD();
         this.user = user;
         this.cod_med = cod_med;
@@ -34,7 +34,7 @@ public class MedicamentoDP {
     public void setNomMed(String nom_med){
         this.nom_med = nom_med;
     }
-    public void setStockMed(int stock_med){
+    public void setStockMed(double stock_med){
         this.stock_med = stock_med;
     }
     public String getUser(){
@@ -49,12 +49,12 @@ public class MedicamentoDP {
     public String getNomMed(){
         return this.nom_med;
     }
-    public int getStockMed(){
+    public double getStockMed(){
         return this.stock_med;
     }
-    public boolean guardarMed(){
-        return medicamentoMD.insertar(cod_med, user, tipo_med, nom_med, stock_med);
-    }
+    /*public boolean guardarMed(){
+        //return medicamentoMD.insertar(cod_med, user, tipo_med, nom_med, stock_med);
+    }*/
     public MedicamentoDP consultaParametro(String cod){
 
         return medicamentoMD.consultaParametro(cod);
