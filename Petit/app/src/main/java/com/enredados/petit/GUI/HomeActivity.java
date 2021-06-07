@@ -56,6 +56,11 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(medic);
     }
 
+    public void abrirPaciente(View vista) {
+        Intent paciente = new Intent(this, PacienteActivity.class);
+        startActivity(paciente);
+    }
+
     public void logOut(View view) {
         pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
         pref.clear();
@@ -69,4 +74,6 @@ public class HomeActivity extends AppCompatActivity {
         Intent logIn = new Intent(this, AuthActivity.class);
         startActivity(logIn);
     }
+
+
 }

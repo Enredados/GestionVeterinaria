@@ -86,7 +86,6 @@ public class AuthActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!emailView.getText().toString().isEmpty() && !passView.getText().toString().isEmpty()) {
-                    System.out.println(emailView.getText().toString() + " " + passView.getText().toString());
 
                     FirebaseAuth.getInstance().signInWithEmailAndPassword(emailView.getText().toString(), passView.getText().toString())
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -114,7 +113,7 @@ public class AuthActivity extends AppCompatActivity {
                 .requestEmail().build();
 
         GoogleSignInClient googleClient = GoogleSignIn.getClient(this, googleConf);
-        googleClient.signOut();
+       // googleClient.signOut();
 
         startActivityForResult(googleClient.getSignInIntent(), GOOGLE_SIGN_IN);
     }
@@ -163,7 +162,6 @@ public class AuthActivity extends AppCompatActivity {
         {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 if(account != null)
                 {

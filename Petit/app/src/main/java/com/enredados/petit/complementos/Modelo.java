@@ -5,11 +5,17 @@ import java.text.DateFormat;
 public class Modelo {
 
     private String tipo;
-    private DateFormat fecha;
+    private String descripcion;
+    private String fecha;
 
-    public Modelo(String tipo, DateFormat fecha) {
+    public Modelo(String tipo, String descripcion, String fecha) {
         this.tipo = tipo;
+        this.descripcion = descripcion;
         this.fecha = fecha;
+    }
+
+    public Modelo() {
+
     }
 
     public String getTipo() {
@@ -20,11 +26,19 @@ public class Modelo {
         this.tipo = tipo;
     }
 
-    public DateFormat getFecha() {
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(DateFormat fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

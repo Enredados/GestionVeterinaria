@@ -15,7 +15,7 @@
         android:layout_marginEnd="26dp"
         android:layout_marginBottom="28dp"
         android:clickable="true"
-        android:onClick="abrirOtro"
+        android:onClick="abrirRegistro"
         android:src="@drawable/ic_action_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
