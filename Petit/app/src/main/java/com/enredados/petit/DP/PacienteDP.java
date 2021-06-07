@@ -1,23 +1,21 @@
 package com.enredados.petit.DP;
 import com.enredados.petit.MD.PacienteMD;
+import java.util.ArrayList;
 
 public class PacienteDP  {
-    //ActivityUserBinding binding;
 
-    private String codigo, nombre, especie, raza, genero, notas, mensaje;
+    private String codigo, nombre, especie, raza, genero;
     private double peso;
     private int imagenId, edad;
     private PacienteMD pacienteMD;
 
     public PacienteDP(String codigo, String nombre, String especie, String raza,
-                String genero, String mensaje, double peso,
-                int imagenId, int edad) {
+                String genero, double peso, int imagenId, int edad) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.especie = especie;
         this.raza = raza;
         this.genero = genero;
-        this.mensaje = mensaje;
         this.peso = peso;
         this.imagenId = imagenId;
         this.edad = edad;
@@ -85,10 +83,6 @@ public class PacienteDP  {
         this.edad = edad;
     }
 
-    public String getMensaje() { return mensaje; }
-
-    public void setMensaje(String mensaje) { this.mensaje = mensaje; }
-
     public int getImagenId() { return imagenId; }
 
     public void setImagenId(int imagenId) { this.imagenId = imagenId; }
@@ -96,6 +90,10 @@ public class PacienteDP  {
 
     public boolean insertarDP(){
         return pacienteMD.insertarMD();
+    }
+
+    public ArrayList<PacienteDP> consultaGeneral(){
+        return pacienteMD.consultaGeneralMD();
     }
 /*
     public boolean consultarDP(){
@@ -114,9 +112,7 @@ public class PacienteDP  {
         return pacienteMD.verificarExisteMD();
     }
 
-    public ArrayList<PacienteDP> consultarTodosDP(){
-        return pacienteMD.consultarTodosMD();
-    }
+
      */
     /*
     @Override

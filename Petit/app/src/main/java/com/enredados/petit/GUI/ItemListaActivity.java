@@ -21,9 +21,9 @@ import java.util.ArrayList;
 public class ItemListaActivity extends ArrayAdapter<PacienteDP> {
 
 
-    public ItemListaActivity(Context context, ArrayList<PacienteDP> userArrayList){
+    public ItemListaActivity(Context context, ArrayList<PacienteDP> pacienteArrayList){
 
-        super(context, R.layout.activity_item_lista,userArrayList);
+        super(context, R.layout.activity_item_lista,pacienteArrayList);
 
     }
 
@@ -31,7 +31,7 @@ public class ItemListaActivity extends ArrayAdapter<PacienteDP> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        PacienteDP user = getItem(position);
+        PacienteDP pacienteDP = getItem(position);
 
         if (convertView == null){
 
@@ -39,13 +39,11 @@ public class ItemListaActivity extends ArrayAdapter<PacienteDP> {
 
         }
 
-        ImageView imagenVista = convertView.findViewById(R.id.mascotaImagen);
-        TextView usuarioNombre = convertView.findViewById(R.id.mascotaNombre);
-        TextView msg = convertView.findViewById(R.id.mensaje);
+        ImageView mascotaImagen = convertView.findViewById(R.id.mascotaImagen);
+        TextView mascotaNombre = convertView.findViewById(R.id.mascotaNombre);
 
-        imagenVista.setImageResource(user.getImagenId());
-        usuarioNombre.setText(user.getNombre());
-        msg.setText(user.getMensaje());
+        mascotaImagen.setImageResource(pacienteDP.getImagenId());
+        mascotaNombre.setText(pacienteDP.getNombre());
 
 
         return convertView;

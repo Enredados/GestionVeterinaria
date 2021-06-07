@@ -7,25 +7,25 @@
     tools:context=".GUI.PacienteActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_image"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:id="@+id/profile_imagen"
+        android:layout_width="147dp"
+        android:layout_height="141dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/baloo"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:src="@drawable/baloo" />
 
     <TextView
         android:id="@+id/scode_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/profile_image"
+        android:layout_below="@+id/profile_imagen"
         android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:text="" />
 
     <RelativeLayout
-        android:id="@+id/relative_name"
+        android:id="@+id/relative_nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -43,14 +43,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
+                android:text="Nombre"
                 android:textSize="12sp"/>
 
             <TextView
-                android:id="@+id/name_profile"
+                android:id="@+id/nombre_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chris Morris"
+                android:text="Baloo"
                 android:textSize="26sp"
                 android:textColor="@color/black"/>
 
@@ -60,10 +60,10 @@
 
 
     <RelativeLayout
-        android:id="@+id/relative_phone"
+        android:id="@+id/relative_Especie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/relative_name"
+        android:layout_below="@+id/relative_nombre"
         android:paddingVertical="10dp">
 
 
@@ -76,14 +76,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Phone"
+                android:text="Especie"
                 android:textSize="12sp"/>
 
             <TextView
-                android:id="@+id/phone_profile"
+                android:id="@+id/especie_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+91-999999999"
+                android:text="Perro, gato, etc... "
                 android:textSize="26sp"
                 android:textColor="@color/black"/>
 
@@ -91,29 +91,15 @@
 
     </RelativeLayout>
 
-    <View
-        android:layout_below="@+id/relative_phone"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/black"/>
-
-
-
-    <View
-        android:layout_below="@+id/relative_name"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/black"/>
-
 
     <RelativeLayout
-        android:id="@+id/relative_house_no"
+        android:id="@+id/relative_raza"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
         android:background="?attr/selectableItemBackground"
-        android:layout_below="@id/relative_phone"
+        android:layout_below="@id/relative_Especie"
         android:paddingVertical="10dp">
 
         <LinearLayout
@@ -125,14 +111,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Country"
+                android:text="Raza"
                 android:textSize="12sp"/>
 
             <TextView
-                android:id="@+id/country_profile"
+                android:id="@+id/raza_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="UAE"
+                android:text="Grande, pequeña, mediana"
                 android:textSize="26sp"
                 android:textColor="@color/black"/>
 
@@ -140,4 +126,148 @@
 
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_genero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:layout_below="@+id/relative_raza"
+        android:paddingVertical="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="70dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Genero"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/genero_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Macho / Hembra"
+                android:textSize="26sp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_peso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:layout_below="@+id/relative_genero"
+        android:paddingVertical="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="70dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Peso"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/peso_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="60kg"
+                android:textSize="26sp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_edad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:layout_below="@+id/relative_peso"
+        android:paddingVertical="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="70dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edad"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/edad_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4 años"
+                android:textSize="26sp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_below="@+id/relative_Especie"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
+
+    <View
+        android:layout_below="@+id/relative_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
+
+    <View
+        android:layout_below="@+id/relative_raza"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
+
+    <View
+        android:layout_below="@+id/relative_genero"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
+
+    <View
+        android:layout_below="@+id/relative_peso"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"/>
+
+    <Button
+        android:id="@+id/btnAgendarCita"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relative_edad"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="152dp"
+        android:text="Agendar Cita" />
 </RelativeLayout>
