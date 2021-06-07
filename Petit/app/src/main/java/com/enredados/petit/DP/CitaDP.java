@@ -1,6 +1,9 @@
 package com.enredados.petit.DP;
 
+import com.enredados.petit.MD.CitaMD;
+
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CitaDP {
@@ -9,17 +12,19 @@ public class CitaDP {
     private DateFormat fecha;
     private String tipo;
     private String descripcion;
-    //private CitaMD citaMD;
+    private CitaMD citaMD;
 
     public CitaDP(String codigo, DateFormat fecha, String tipo) {
         this.codigo = codigo;
         this.fecha = fecha;
         this.tipo = tipo;
+        citaMD = new CitaMD(this);
     }
 
     public CitaDP(String descripcion, DateFormat fecha){
         this.fecha = fecha;
         this.descripcion = descripcion;
+        citaMD = new CitaMD(this);
     }
 
     public CitaDP(String codigo, DateFormat fecha, String tipo, String descripcion) {
@@ -27,13 +32,14 @@ public class CitaDP {
         this.fecha = fecha;
         this.tipo = tipo;
         this.descripcion = descripcion;
+        citaMD = new CitaMD(this);
     }
 
-    /*
+
     public CitaDP() {
         citaMD = new CitaMD(this);
     }
-     */
+
 
     public String getCodigo() {
         return codigo;
@@ -63,7 +69,7 @@ public class CitaDP {
 
     public void setDescripcion(String descripcion){ this.descripcion = descripcion; }
 
-    public List<CitaDP> consultarHistorialCitas(){
+    public ArrayList<CitaDP> consultarHistorialCitas(){
         return null;
         //return citaMD.consultarTodasDescripciones();
     }
