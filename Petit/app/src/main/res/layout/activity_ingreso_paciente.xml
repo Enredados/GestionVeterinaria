@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GUI.PacienteActivity">
+    tools:context=".GUI.IngresoPacienteActivity">
 
     <TextView
         android:id="@+id/IngresoPaciente"
@@ -46,7 +46,7 @@
             android:layout_height="8dp" />
 
         <EditText
-            android:id="@+id/authLayout"
+            android:id="@+id/nombreEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -114,14 +114,17 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/guardarButton"
-        android:layout_width="wrap_content"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnIngresarMascota"
+        android:layout_width="194dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Guardar"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="36dp"
+        android:clickable="true"
+        android:onClick="ingresar"
+        android:src="@drawable/ic_check"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

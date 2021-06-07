@@ -2,35 +2,36 @@ package com.enredados.petit.GUI;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import com.enredados.petit.DP.PacienteDP;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.enredados.petit.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class IngresoPacienteActivity extends AppCompatActivity {
 
-    private Spinner especieSpinner;
-    private Spinner generoSpinner;
-    private EditText codigo, nombre, raza, peso, edad;
-    private PacienteDP pacienteDP;
+    private Spinner especieSpinner, generoSpinner;
+    private EditText etCodigo, etNombre, etRaza, etPeso, etEdad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingreso_paciente);
-        ingreso();
-    }
-    public void ingreso(){
-        codigo = (EditText) findViewById(R.id.codigoEditText);
-        nombre = (EditText) findViewById(R.id.authLayout);
-        raza = (EditText) findViewById(R.id.razaEditText);
-        peso = (EditText) findViewById(R.id.pesoEditText);
-        edad = (EditText) findViewById(R.id.edadEditText);
+        etCodigo = (EditText) findViewById(R.id.codigoEditText);
+        etNombre = (EditText) findViewById(R.id.nombreEditText);
+        etRaza = (EditText) findViewById(R.id.razaEditText);
+        etPeso = (EditText) findViewById(R.id.pesoEditText);
+        etEdad = (EditText) findViewById(R.id.edadEditText);
         especieSpinner = (Spinner) findViewById(R.id.especieSpinner);
         generoSpinner = (Spinner) findViewById(R.id.generoSpinner);
         //Opciones del spinner
@@ -40,24 +41,49 @@ public class IngresoPacienteActivity extends AppCompatActivity {
         especieSpinner.setAdapter(especieAdapter);
         ArrayAdapter<String> generoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, genero);
         generoSpinner.setAdapter(generoAdapter);
+    }
+    public void ingresar(View v){
+        String codigo = etCodigo.getText().toString();
+        String nombre = etNombre.getText().toString();
+        String especie = especieSpinner.getSelectedItem().toString();
+        String raza = etRaza.getText().toString();
+        String genero = generoSpinner.getSelectedItem().toString();
+        String peso = etPeso.getText().toString();
+        String edad = etEdad.getText().toString();
+        //String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
 
-        //Se carga el objeto PacienteDP
-        pacienteDP = new PacienteDP();
-        pacienteDP.setCodigo(codigo.toString());
-        pacienteDP.setNombre(nombre.toString());
-        pacienteDP.setEspecie(especieSpinner.getSelectedItem().toString());
-        pacienteDP.setRaza(raza.toString());
-        pacienteDP.setGenero(generoSpinner.getSelectedItem().toString());
-        pacienteDP.setPeso(Double.parseDouble(peso.toString()));
-        pacienteDP.setEdad(Integer.parseInt(edad.toString()));
+        Map<String, Object> pacientes = new HashMap<>();
+        pacientes.put("codigo", codigo);
+        pacientes.put("nombre", nombre);
+        pacientes.put("especie", especie);
+        pacientes.put("raza", raza);
+        pacientes.put("genero", genero);
+        pacientes.put("peso", peso);
+        pacientes.put("edad", edad);
 
-        Button guardar = findViewById(R.id.guardarButton);
-        guardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pacienteDP.insertarDP();
-            }
-        });
+        FirebaseFirestore db= FirebaseFirestore.getInstance();
+        db.collection("PACIENTE").document(codigo)
+                .set(pacientes)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        toastAgregado();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        toastError();
+                    }
+                });
+    }
+    private void toastAgregado(){
+        Toast.makeText(this, "Se cargaron los datos de la mascota",
+                Toast.LENGTH_SHORT).show();
+    }
+    private void toastError(){
+        Toast.makeText(this, "No se cargaron los datos de la mascota",
+                Toast.LENGTH_SHORT).show();
     }
 
 }

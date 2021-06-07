@@ -1,5 +1,6 @@
 package com.enredados.petit.GUI;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,6 +16,15 @@ import com.enredados.petit.DP.CitaDP;
 import com.enredados.petit.R;
 import com.enredados.petit.complementos.Adaptador;
 import com.enredados.petit.complementos.Modelo;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -27,6 +37,7 @@ public class HistorialCitasActivity extends AppCompatActivity {
 
     private ListView lvItems;
     private Adaptador adaptador;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +45,8 @@ public class HistorialCitasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_historial_citas);
 
         lvItems = (ListView) findViewById(R.id.lvItems);
-        ArrayList items = getArrayItems();
+        //ArrayList items = getArrayItems();
+        ArrayList items = consultarCitas(""); //CAMBIAR EL CODIGO DEL PACIENTE POR EL EXTRA QUE VIENE DE LA ANTERIOR ACTIVIDAD
         adaptador = new Adaptador(getArrayItems(), this);
         lvItems.setAdapter(adaptador);
 
@@ -50,7 +62,6 @@ public class HistorialCitasActivity extends AppCompatActivity {
                 visorDescripcion.putExtra("tipo", ((Modelo) items.get(position)).getTipo());
                 visorDescripcion.putExtra("fecha", ((Modelo) items.get(position)).getFecha());
                 visorDescripcion.putExtra("descripcion", ((Modelo) items.get(position)).getDescripcion());
-                visorDescripcion.putExtra("imagen", R.mipmap.ic_launcher_round);
                 startActivity(visorDescripcion);
             }
         });
@@ -62,56 +73,38 @@ public class HistorialCitasActivity extends AppCompatActivity {
         Date now = new Date();
         String mensaje = "todo bien con el perro, tiene rabia y kobik";
 
-        listItems.add(new Modelo("Medica", mensaje, DateFormat.getTimeInstance(DateFormat.SHORT).format(now)));
-        listItems.add(new Modelo("Peluqueria", "sin observaciones", DateFormat.getTimeInstance(DateFormat.SHORT).format(now)));
-        listItems.add(new Modelo("Vacunacion", mensaje, DateFormat.getTimeInstance(DateFormat.SHORT).format(now)));
-        listItems.add(new Modelo("Medica", mensaje, DateFormat.getTimeInstance(DateFormat.SHORT).format(now)));
-        listItems.add(new Modelo("Vacunacion", mensaje, DateFormat.getTimeInstance(DateFormat.SHORT).format(now)));
-        listItems.add(new Modelo("Operacion", mensaje, DateFormat.getTimeInstance(DateFormat.SHORT).format(now)));
-        listItems.add(new Modelo("Medica", mensaje, DateFormat.getTimeInstance(DateFormat.SHORT).format(now)));
-        listItems.add(new Modelo("Medica", mensaje, DateFormat.getTimeInstance(DateFormat.SHORT).format(now)));
-        listItems.add(new Modelo("Peluqueria", mensaje, DateFormat.getTimeInstance(DateFormat.SHORT).format(now)));
+        listItems.add(new Modelo("Medica", mensaje, "15/may/2021"));
+        listItems.add(new Modelo("Peluqueria", "sin observaciones", "12/jun/2021"));
+        listItems.add(new Modelo("Vacunacion", mensaje, "05/abril/2021"));
+        listItems.add(new Modelo("Medica", mensaje, "23/feb/2021"));
+        listItems.add(new Modelo("Medica", mensaje, "15/may/2021"));
+        listItems.add(new Modelo("Peluqueria", "sin observaciones", "12/jun/2021"));
+        listItems.add(new Modelo("Vacunacion", mensaje, "05/abril/2021"));
+        listItems.add(new Modelo("Medica", mensaje, "23/feb/2021"));
 
         return listItems;
     }
 
-
-
-    /*
-    // atributos
-    private ListView listViewCitas;
-    private List<CitaDP> objetosCitas;
-    private List<Modelo> listaCitas;
-    private ArrayAdapter adapter;
-    private CitaDP citaDP;
-    ListAdapter mAdapter;
-    ListAdapter adaptador;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_historial_citas);
-
-        // reconocer el componente listview
-        listViewCitas = findViewById(R.id.lista);
-        //objetosCitas = citaDP.consultarHistorialCitas();
-
-
-        // aqui cargar todas las citas de la db y crear objetos Modelo para presentar solo el tipo y la fecha
-        listaCitas.add(new Modelo("tipo1", null));
-        
-        mAdapter = new com.enredados.petit.complementos.ListAdapter(this, R.layout.item_row, listaCitas);
-        listViewCitas.setAdapter(mAdapter);
+    // poner de parametro el codigo de la mascota a la que se hace referencia
+    private ArrayList<Modelo> consultarCitas(String codigoPaciente){
+        ArrayList<Modelo> citasArrayList = new ArrayList<>();
+        db.collection("CITA")
+                .whereEqualTo("paciente", codigoPaciente)// aqui poner .where("paciente", "==", codigo)  o filtrar luego que el codigo del paciente sea el codigo del parametro
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot document :task.getResult()){
+                                citasArrayList.add(new Modelo(
+                                        document.get("tipo").toString(),
+                                        document.get("descripcion").toString(),
+                                        document.get("fecha").toString()
+                                ));
+                            }
+                        }
+                    }
+                });
+                return citasArrayList;
     }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "Elemento presionado: " + position, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, HistorialCitasDescripcionActivity.class);
-        // aqui cambiar el segundo argumento por mAdapter.getItem(position).getDescripcion()
-
-        intent.putExtra("descripcion", mAdapter.getItem(position).getClass().toString());
-        startActivity(intent);
-    }
-    */
 }
