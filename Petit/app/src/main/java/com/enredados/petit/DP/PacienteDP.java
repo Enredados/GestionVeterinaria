@@ -2,12 +2,11 @@ package com.enredados.petit.DP;
 
 public class PacienteDP  {
 
-    private String codigo, nombre, especie, raza, genero;
-    private double peso;
-    private int edad;
+    private String codigo, nombre, especie, raza, genero, peso, edad;
+
     public PacienteDP(){ }
     public PacienteDP(String codigo, String nombre, String especie, String raza,
-                String genero, double peso, int edad) {
+                String genero,String peso, String edad) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.especie = especie;
@@ -58,19 +57,19 @@ public class PacienteDP  {
         this.genero = genero;
     }
 
-    public double getPeso() {
+    public String getPeso() {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(String peso) {
         this.peso = peso;
     }
 
-    public int getEdad() {
+    public String getEdad() {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(String edad) {
         this.edad = edad;
     }
 

@@ -68,7 +68,7 @@ public class PacienteActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             ArrayList<String> nombre = new ArrayList<String>();
-
+                            System.out.println("Tamano "+task.getResult().size());
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 PacienteDP paciente = new PacienteDP();
                                 nombre.add(document.get("nombre").toString());
@@ -77,8 +77,8 @@ public class PacienteActivity extends AppCompatActivity {
                                 paciente.setEspecie(document.get("especie").toString());
                                 paciente.setRaza(document.get("raza").toString());
                                 paciente.setGenero(document.get("genero").toString());
-                                paciente.setPeso(Double.parseDouble(document.get("peso").toString()));
-                                paciente.setEdad(Integer.parseInt(document.get("edad").toString()));
+                                paciente.setPeso(document.get("peso").toString());
+                                paciente.setEdad(document.get("edad").toString());
                                 pacientes.add(paciente);
                             }
                             setLista(nombre);

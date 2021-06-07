@@ -19,9 +19,15 @@
             android:label="Clientes"
             android:parentActivityName=".GUI.HomeActivity" />
         <activity
+            android:name=".GUI.PacienteActivity"
+            android:parentActivityName=".GUI.HomeActivity" />
+        <activity
             android:name=".GUI.registro_dueno"
             android:label="Agregar Cliente"
             android:parentActivityName=".GUI.dueno" />
+        <activity
+            android:name=".GUI.IngresoPacienteActivity"
+            android:parentActivityName=".GUI.PacienteActivity" />
         <activity
             android:name=".GUI.RegistroActivity"
             android:parentActivityName=".GUI.AuthActivity" />
