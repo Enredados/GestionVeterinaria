@@ -20,6 +20,7 @@ public class MedicamentoDP {
     }
 
     public MedicamentoDP(){
+        medicamentoMD = new MedicamentoMD();
     }
     public void setUser(String user){
         this.user = user;
@@ -53,6 +54,10 @@ public class MedicamentoDP {
     }
     public boolean guardarMed(){
         return medicamentoMD.insertar(cod_med, user, tipo_med, nom_med, stock_med);
+    }
+    public MedicamentoDP consultaParametro(String cod){
+
+        return medicamentoMD.consultaParametro(cod);
     }
 
 }
