@@ -6,7 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.enredados.petit.DP.PacienteDP;
 import com.enredados.petit.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,6 +21,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 
 public class PerfilMascota extends AppCompatActivity {
+    private String codigoPaciente;
     private EditText nombre;
     private String[] info;
     ArrayList<PacienteDP> pacientes = new ArrayList<PacienteDP>();
@@ -33,7 +37,22 @@ public class PerfilMascota extends AppCompatActivity {
         Intent men = getIntent();
         info = men.getStringArrayExtra(PacienteActivity.ACT_INFO);
         nombre.setText(info[0]);
+
+        // obtener el codigo del paciente del perfil que se muestra
+        codigoPaciente = men.getStringExtra("codigoPaciente");
     }
+
+    // metodo que lanza la vista del historial de las citas
+    public void verHistorialCitas(View view){
+
+    }
+
+    public void verHistoralCitas(View view) {
+        Intent visorHistorial = new Intent(this, HistorialCitasActivity.class);
+        visorHistorial.putExtra("codigoPaciente", codigoPaciente);
+        startActivity(visorHistorial);
+    }
+
     /*public void btn_verFicha(View vista) {
         Intent ficha = new Intent(this, IngresoPacienteActivity.class);
         datosPaciente();

@@ -18,6 +18,7 @@
         <activity android:name=".GUI.ConsultaGeneralMed" />
         <activity android:name=".GUI.ConsultaParametroMed" />
         <activity android:name=".GUI.HistorialCitasDescripcionActivity" />
+        <activity android:name=".GUI.HistorialCitasActivity"/>
         <activity
             android:name=".GUI.dueno"
             android:label="Clientes"

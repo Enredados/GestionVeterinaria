@@ -35,9 +35,11 @@
         android:id="@+id/Mascotas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="144dp"
         android:onClick="abrirPaciente"
         android:text="Mascotas"
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="517dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mediButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

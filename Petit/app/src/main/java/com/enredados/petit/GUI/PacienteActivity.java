@@ -45,6 +45,7 @@ public class PacienteActivity extends AppCompatActivity {
                 String[] info = new String[1];
                 info[0] = paciente.getNombre();
                 registro.putExtra(ACT_INFO, info);
+                registro.putExtra("codigoPaciente", paciente.getCodigo());
                 startActivity(registro);
             }
         });
