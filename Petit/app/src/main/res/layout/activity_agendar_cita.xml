@@ -1,38 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center"
     tools:context=".GUI.AgendarCita">
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_fecha"
-        android:hint="Agendar fecha"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:textAlignment="center"
-        android:layout_marginTop="16dp">
-    </EditText>
-
-    <TextView
+    <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_Hora"
-        android:hint="Hora"
-        android:textSize="32sp"
-        android:textStyle="bold"
+        android:layout_marginTop="100dp"
         android:gravity="center"
-        android:drawableTop="@drawable/ic_time"
-        android:drawablePadding="16dp"
-        android:background="@android:drawable/editbox_background">
-    </TextView>
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+        <EditText
+            android:id="@+id/et_Codigo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Codigo"
+            android:inputType="text"
+            android:textColor="@color/black"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seleccione el tipo de cita"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="176dp"
+            tools:layout_editor_absoluteY="131dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+        <Spinner
+            android:id="@+id/tipoCitaSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:ems="10" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+        <EditText
+            android:id="@+id/et_fecha"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Agendar fecha"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold">
+
+        </EditText>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+        <TextView
+            android:id="@+id/tv_Hora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/editbox_background"
+            android:drawableTop="@drawable/ic_time"
+            android:drawablePadding="16dp"
+            android:gravity="center"
+            android:hint="Hora"
+            android:textSize="32sp"
+            android:textStyle="bold">
+
+        </TextView>
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="228dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_check" />
 
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
