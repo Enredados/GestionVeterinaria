@@ -23,6 +23,7 @@
             android:parentActivityName=".GUI.HomeActivity" />
         <activity
             android:name=".GUI.PacienteActivity"
+            android:label="Mascotas"
             android:parentActivityName=".GUI.HomeActivity" />
         <activity
             android:name=".GUI.registro_dueno"
@@ -30,6 +31,7 @@
             android:parentActivityName=".GUI.dueno" />
         <activity
             android:name=".GUI.IngresoPacienteActivity"
+            android:label="Ingreso Mascota"
             android:parentActivityName=".GUI.PacienteActivity" />
         <activity
             android:name=".GUI.RegistroActivity"

@@ -68,7 +68,6 @@ public class PacienteActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             ArrayList<String> nombre = new ArrayList<String>();
-                            System.out.println("Tamano "+task.getResult().size());
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 PacienteDP paciente = new PacienteDP();
                                 nombre.add(document.get("nombre").toString());

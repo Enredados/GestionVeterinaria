@@ -10,15 +10,15 @@
         android:id="@+id/agregarMascota"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="647dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginEnd="26dp"
         android:layout_marginBottom="28dp"
         android:clickable="true"
         android:onClick="abrirRegistro"
-        app:srcCompat="@drawable/ic_action_name" />
+        app:srcCompat="@drawable/ic_action_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <ListView
         android:id="@+id/listaMascotas"

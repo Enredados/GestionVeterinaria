@@ -6,20 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".GUI.IngresoPacienteActivity">
 
-    <TextView
-        android:id="@+id/IngresoPaciente"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:text="Ingreso Mascota"
-        android:textAlignment="center"
-        android:textSize="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.375" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -37,9 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Código"
-            android:inputType="textEmailAddress"
-            android:textColor="#FDFDFD" />
+            android:hint="Chip"
+            android:inputType="text"
+            android:textColor="@color/black" />
 
         <Space
             android:layout_width="match_parent"
@@ -51,8 +37,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Nombre"
-            android:inputType="textEmailAddress"
-            android:textColor="#FDFDFD"/>
+            android:inputType="text"
+            android:textColor="@color/black"/>
 
         <Space
             android:layout_width="match_parent"
@@ -62,7 +48,7 @@
             android:id="@+id/especieSpinner"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:ems="10"/>
+            android:ems="10" />
 
         <Space
             android:layout_width="match_parent"
@@ -74,9 +60,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Raza"
-            android:inputType="textEmailAddress"
-            android:textColor="#FDFDFD"
-            android:textColorHighlight="@color/teal_700"/>
+            android:inputType="text"
+            android:textColor="@color/black"/>
 
         <Space
             android:layout_width="match_parent"
@@ -97,8 +82,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Peso"
-            android:inputType="textPassword"
-            android:textColor="#FFFFFF"/>
+            android:inputType="text"
+            android:textColor="@color/black"/>
         <Space
             android:layout_width="match_parent"
             android:layout_height="8dp" />
@@ -109,8 +94,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Edad"
-            android:inputType="textPassword"
-            android:textColor="#FFFFFF"/>
+            android:inputType="text"
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 
