@@ -10,7 +10,7 @@
         android:id="@+id/floatingActionButton3"
         android:layout_width="194dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="36dp"
         android:clickable="true"
         android:onClick="crearDueno"
@@ -25,7 +25,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="240dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,5 +82,17 @@
             android:inputType="phone" />
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="36dp"
+        android:clickable="true"
+        android:onClick="eliminar"
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButton3"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:srcCompat="@drawable/ic_delete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
