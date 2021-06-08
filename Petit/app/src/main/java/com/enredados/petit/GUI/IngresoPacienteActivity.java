@@ -1,5 +1,6 @@
 package com.enredados.petit.GUI;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ public class IngresoPacienteActivity extends AppCompatActivity {
 
     private Spinner especieSpinner, generoSpinner;
     private EditText etCodigo, etNombre, etRaza, etPeso, etEdad;
+    private String[] info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class IngresoPacienteActivity extends AppCompatActivity {
         etEdad = (EditText) findViewById(R.id.edadEditText);
         especieSpinner = (Spinner) findViewById(R.id.especieSpinner);
         generoSpinner = (Spinner) findViewById(R.id.generoSpinner);
+
         //Opciones del spinner
         String[] especie = {"Perro", "Gato", "Exótico"};
         String[] genero = {"Macho", "Hembra"};
@@ -41,6 +44,23 @@ public class IngresoPacienteActivity extends AppCompatActivity {
         especieSpinner.setAdapter(especieAdapter);
         ArrayAdapter<String> generoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, genero);
         generoSpinner.setAdapter(generoAdapter);
+
+        Intent men = getIntent();
+        info = men.getStringArrayExtra(PerfilMascota.INFO);
+
+
+        if (info.length > 1) {
+            setTitle("Editar Mascota");
+            etCodigo.setVisibility(View.INVISIBLE);
+            especieSpinner.setVisibility(View.INVISIBLE);
+            generoSpinner.setVisibility(View.INVISIBLE);
+            etCodigo.setText(info[0]);
+            etNombre.setText(info[1]);
+            etRaza.setText(info[3]);
+            etPeso.setText(info[5]);
+            etEdad.setText(info[6]);
+        }
+
     }
     public void ingresar(View v){
         String codigo = etCodigo.getText().toString();
@@ -50,10 +70,9 @@ public class IngresoPacienteActivity extends AppCompatActivity {
         String genero = generoSpinner.getSelectedItem().toString();
         String peso = etPeso.getText().toString();
         String edad = etEdad.getText().toString();
-        //String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
 
         Map<String, Object> pacientes = new HashMap<>();
-        pacientes.put("codigo", codigo);
+        pacientes.put("chip", codigo);
         pacientes.put("nombre", nombre);
         pacientes.put("especie", especie);
         pacientes.put("raza", raza);
@@ -76,6 +95,8 @@ public class IngresoPacienteActivity extends AppCompatActivity {
                         toastError();
                     }
                 });
+        Intent lista = new Intent(v.getContext(), PacienteActivity.class);
+        startActivity(lista);
     }
     private void toastAgregado(){
         Toast.makeText(this, "Se cargaron los datos de la mascota",
