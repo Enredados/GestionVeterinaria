@@ -23,6 +23,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -45,6 +47,8 @@ public class AgendarCita extends AppCompatActivity {
         etFecha = findViewById(R.id.et_fecha);
         etCodigo = findViewById(R.id.et_Codigo);
         tvHora = findViewById(R.id.tv_Hora);
+        tipoCitaSpinner = findViewById(R.id.tipo_CitaSpinner);
+
         String[] tipoCita = {"Atención Clínica", "Atención Sanitaria", "Atención Estética"};
         ArrayAdapter<String> tipoCitaAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tipoCita);
         tipoCitaSpinner.setAdapter(tipoCitaAdapter);
@@ -107,21 +111,22 @@ public class AgendarCita extends AppCompatActivity {
         });
     }
     public void ingresar(View v){
-        String fecha = etFecha.getText().toString();
         String codigo = etCodigo.getText().toString();
-        String hora = tvHora.getText().toString();
         String tipoCita = tipoCitaSpinner.getSelectedItem().toString();
+        String fecha = etFecha.getText().toString();
+        String hora = tvHora.getText().toString();
 
 
-        Map<String, Object> pacientes = new HashMap<>();
-        pacientes.put("fecha", fecha);
-        pacientes.put("hora", hora);
-        pacientes.put("tipo", tipoCita);
-        //pacientes.put("user", user.getEmail());
+        Map<String, Object> citas = new HashMap<>();
+        citas.put("codigo", codigo);
+        citas.put("tipo", tipoCita);
+        citas.put("fecha", fecha);
+        citas.put("hora", hora);
+        //citas.put("user", user.getEmail());
 
         FirebaseFirestore db= FirebaseFirestore.getInstance();
-        db.collection("PACIENTE").document(codigo)
-                .set(pacientes)
+        db.collection("CITA").document(codigo)
+                .set(citas)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -134,15 +139,38 @@ public class AgendarCita extends AppCompatActivity {
                         toastError();
                     }
                 });
-        Intent lista = new Intent(v.getContext(), PacienteActivity.class);
-        startActivity(lista);
+        Intent perfil = new Intent(v.getContext(), PerfilMascota.class);
+        startActivity(perfil);
     }
     private void toastAgregado(){
-        Toast.makeText(this, "Se cargaron los datos de la mascota",
+        Toast.makeText(this, "Cita agendada exitosamente",
                 Toast.LENGTH_SHORT).show();
     }
     private void toastError(){
-        Toast.makeText(this, "No se cargaron los datos de la mascota",
+        Toast.makeText(this, "Se ha producido un error",
+                Toast.LENGTH_SHORT).show();
+    }
+    public void eliminar(View v){
+        FirebaseFirestore db= FirebaseFirestore.getInstance();
+        db.collection("CITA").document(etCodigo.getText().toString())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        toastEliminado();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+
+                    }
+                });
+        Intent perfil = new Intent(v.getContext(), PerfilMascota.class);
+        startActivity(perfil);
+    }
+    private void toastEliminado(){
+        Toast.makeText(this, "Cita eliminada",
                 Toast.LENGTH_SHORT).show();
     }
 }

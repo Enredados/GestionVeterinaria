@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="8dp" />
         <Spinner
-            android:id="@+id/tipoCitaSpinner"
+            android:id="@+id/tipo_CitaSpinner"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:ems="10" />
@@ -83,15 +83,29 @@
         android:id="@+id/floatingActionButton6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="228dp"
         android:clickable="true"
+        android:onClick="ingresar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.931"
         app:srcCompat="@drawable/ic_check" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="eliminar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintVertical_bias="0.931"
+        app:srcCompat="@drawable/ic_delete" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
