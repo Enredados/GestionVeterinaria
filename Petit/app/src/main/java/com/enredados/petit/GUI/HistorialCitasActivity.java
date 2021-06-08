@@ -19,6 +19,7 @@ import com.enredados.petit.complementos.Modelo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -45,13 +46,14 @@ public class HistorialCitasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historial_citas);
 
+        db = FirebaseFirestore.getInstance();
         lvItems = (ListView) findViewById(R.id.lvItems);
         codigoPaciente = getIntent().getStringExtra("codigoPaciente");
         //ArrayList items = getArrayItems();
         ArrayList items = consultarCitas(codigoPaciente); //CAMBIAR EL CODIGO DEL PACIENTE POR EL EXTRA QUE VIENE DE LA ANTERIOR ACTIVIDAD
-        adaptador = new Adaptador(items, this);
+        /*adaptador = new Adaptador(items, this);
         lvItems.setAdapter(adaptador);
-
+*/
         // para ver la actividad descripcion
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -92,26 +94,33 @@ public class HistorialCitasActivity extends AppCompatActivity {
         ArrayList<Modelo> citasArrayList = new ArrayList<>();
         try {
             db.collection("CITA")
-                    //.whereEqualTo("paciente", codigoPaciente)// aqui poner .where("paciente", "==", codigo)  o filtrar luego que el codigo del paciente sea el codigo del parametro
+                    .whereEqualTo("paciente", codigoPaciente)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
-                        public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     citasArrayList.add(new Modelo(
                                             document.get("tipo").toString(),
                                             document.get("descripcion").toString(),
-                                            document.get("fecha").toString()
+                                            ((Timestamp) document.get("fecha")).toDate().toString()
                                     ));
+                                    cargarCitas(citasArrayList);
                                 }
+                            }
+                            else{
                             }
                         }
                     });
-            return citasArrayList;
-        } catch (Exception e) {
+       } catch (Exception e) {
             citasArrayList.add(new Modelo("Oops", "oops", "15/may/2021 oops"));
         }
         return citasArrayList;
+    }
+
+    public void cargarCitas(ArrayList<Modelo> citas){
+        adaptador = new Adaptador(citas, this);
+        lvItems.setAdapter(adaptador);
     }
 }
