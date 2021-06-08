@@ -52,7 +52,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void abrirMedi(View vista) {
-        Intent medic = new Intent(this, IngresoMed.class);
+        Intent medic = new Intent(this, Medicamentos.class);
         startActivity(medic);
     }
 

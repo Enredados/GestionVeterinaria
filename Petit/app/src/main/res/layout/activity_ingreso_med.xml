@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".GUI.IngresoMed">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="50dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,10 +20,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ingrese el código del medicamento" />
+            android:text="Ingres el código del medicamento" />
 
         <EditText
             android:id="@+id/CodigoMed"
@@ -31,7 +33,7 @@
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ingrese el tipo de medicamento" />
@@ -44,7 +46,7 @@
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ingrese el nombre del medicamento" />
@@ -57,10 +59,10 @@
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textView11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ingrese el Stock del medicamento" />
+            android:text="Ingrese el stock del medicamento" />
 
         <EditText
             android:id="@+id/stockMed"
@@ -73,34 +75,6 @@
             android:id="@+id/AgregarMed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Agregar" />
-
-        <Button
-            android:id="@+id/ConsultarParametro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="ventanaConsultaParametro"
-            android:text="Consulta Parámetro" />
-
-        <Button
-            android:id="@+id/ConsultaGeneral"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="ventanaConsultaGeneral"
-            android:text="Consulta General" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="ventanaEliminar"
-            android:text="Eliminar Medicamento" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="ventanaModificar"
-            android:text="Modificar Medicamento" />
+            android:text="AGREGAR" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
