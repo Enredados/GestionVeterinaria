@@ -38,6 +38,7 @@ public class HistorialCitasActivity extends AppCompatActivity {
     private ListView lvItems;
     private Adaptador adaptador;
     FirebaseFirestore db;
+    private String codigoPaciente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +46,10 @@ public class HistorialCitasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_historial_citas);
 
         lvItems = (ListView) findViewById(R.id.lvItems);
+        codigoPaciente = getIntent().getStringExtra("codigoPaciente");
         //ArrayList items = getArrayItems();
-        ArrayList items = consultarCitas(""); //CAMBIAR EL CODIGO DEL PACIENTE POR EL EXTRA QUE VIENE DE LA ANTERIOR ACTIVIDAD
-        adaptador = new Adaptador(getArrayItems(), this);
+        ArrayList items = consultarCitas(codigoPaciente); //CAMBIAR EL CODIGO DEL PACIENTE POR EL EXTRA QUE VIENE DE LA ANTERIOR ACTIVIDAD
+        adaptador = new Adaptador(items, this);
         lvItems.setAdapter(adaptador);
 
         // para ver la actividad descripcion
@@ -57,7 +59,7 @@ public class HistorialCitasActivity extends AppCompatActivity {
                 Intent visorDescripcion = new Intent(view.getContext(), VisorDescripcion.class);
 
                 Modelo temp = (Modelo) items.get(position);
-                Toast.makeText(HistorialCitasActivity.this, "presionado: "+temp.getTipo(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(HistorialCitasActivity.this, "presionado: "+codigoPaciente, Toast.LENGTH_SHORT).show();
 
                 visorDescripcion.putExtra("tipo", ((Modelo) items.get(position)).getTipo());
                 visorDescripcion.putExtra("fecha", ((Modelo) items.get(position)).getFecha());
@@ -86,25 +88,30 @@ public class HistorialCitasActivity extends AppCompatActivity {
     }
 
     // poner de parametro el codigo de la mascota a la que se hace referencia
-    private ArrayList<Modelo> consultarCitas(String codigoPaciente){
+    private ArrayList<Modelo> consultarCitas(String codigoPaciente) {
         ArrayList<Modelo> citasArrayList = new ArrayList<>();
-        db.collection("CITA")
-                .whereEqualTo("paciente", codigoPaciente)// aqui poner .where("paciente", "==", codigo)  o filtrar luego que el codigo del paciente sea el codigo del parametro
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(QueryDocumentSnapshot document :task.getResult()){
-                                citasArrayList.add(new Modelo(
-                                        document.get("tipo").toString(),
-                                        document.get("descripcion").toString(),
-                                        document.get("fecha").toString()
-                                ));
+        try {
+            db.collection("CITA")
+                    //.whereEqualTo("paciente", codigoPaciente)// aqui poner .where("paciente", "==", codigo)  o filtrar luego que el codigo del paciente sea el codigo del parametro
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    citasArrayList.add(new Modelo(
+                                            document.get("tipo").toString(),
+                                            document.get("descripcion").toString(),
+                                            document.get("fecha").toString()
+                                    ));
+                                }
                             }
                         }
-                    }
-                });
-                return citasArrayList;
+                    });
+            return citasArrayList;
+        } catch (Exception e) {
+            citasArrayList.add(new Modelo("Oops", "oops", "15/may/2021 oops"));
+        }
+        return citasArrayList;
     }
 }

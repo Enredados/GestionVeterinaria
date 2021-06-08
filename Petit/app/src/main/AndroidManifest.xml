@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Petit">
+        <activity android:name=".GUI.PerfilMascota" />
         <activity android:name=".GUI.IngresoMed"></activity>
         <activity android:name=".GUI.ModificacionMed" />
         <activity android:name=".GUI.ModificarMed" />
@@ -17,6 +18,7 @@
         <activity android:name=".GUI.ConsultaGeneralMed" />
         <activity android:name=".GUI.ConsultaParametroMed" />
         <activity android:name=".GUI.HistorialCitasDescripcionActivity" />
+        <activity android:name=".GUI.HistorialCitasActivity"/>
         <activity
             android:name=".GUI.dueno"
             android:label="Clientes"

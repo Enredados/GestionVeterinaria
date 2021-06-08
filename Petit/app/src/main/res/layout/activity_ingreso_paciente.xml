@@ -17,85 +17,96 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/codigoEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Chip"
-            android:inputType="text"
-            android:textColor="@color/black" />
+                <EditText
+                    android:id="@+id/codigoEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Chip"
+                    android:inputType="text"
+                    android:textColor="@color/black" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
 
-        <EditText
-            android:id="@+id/nombreEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Nombre"
-            android:inputType="text"
-            android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/nombreEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Nombre"
+                    android:inputType="text"
+                    android:textColor="@color/black"/>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
 
-        <Spinner
-            android:id="@+id/especieSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:ems="10" />
+                <Spinner
+                    android:id="@+id/especieSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:ems="10" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
 
-        <EditText
-            android:id="@+id/razaEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Raza"
-            android:inputType="text"
-            android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/razaEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Raza"
+                    android:inputType="text"
+                    android:textColor="@color/black"/>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
 
-        <Spinner
-            android:id="@+id/generoSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:ems="10" />
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
+                <Spinner
+                    android:id="@+id/generoSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:ems="10" />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
 
-        <EditText
-            android:id="@+id/pesoEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Peso"
-            android:inputType="text"
-            android:textColor="@color/black"/>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
+                <EditText
+                    android:id="@+id/pesoEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Peso"
+                    android:inputType="text"
+                    android:textColor="@color/black"/>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
 
-        <EditText
-            android:id="@+id/edadEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Edad"
-            android:inputType="text"
-            android:textColor="@color/black"/>
+                <EditText
+                    android:id="@+id/edadEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Edad"
+                    android:inputType="text"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
 

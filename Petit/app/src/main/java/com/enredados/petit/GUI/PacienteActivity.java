@@ -28,7 +28,7 @@ public class PacienteActivity extends AppCompatActivity {
     ListView listaMascotas;
     ArrayList<PacienteDP> pacientes = new ArrayList<PacienteDP>();
     private FirebaseFirestore db;
-    final static String ACT_INFO = "com.enredados.petit.GUI.IngresoPacienteActivity";
+    final static String ACT_INFO = "com.enredados.petit.GUI.PerfilMascota";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,20 +40,12 @@ public class PacienteActivity extends AppCompatActivity {
         listaMascotas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent registro = new Intent(view.getContext(), IngresoPacienteActivity.class);
-                //System.out.println(position);
+                Intent registro = new Intent(view.getContext(), PerfilMascota.class);
                 PacienteDP paciente = pacientes.get(position);
-                String[] info = new String[7];
-
-                info[0] = paciente.getCodigo();
-                info[1] = paciente.getNombre();
-                info[2] = paciente.getEspecie();
-                info[3] = paciente.getRaza();
-                info[4] = paciente.getGenero();
-                info[5] = String.valueOf(paciente.getPeso());
-                info[6] = String.valueOf(paciente.getEdad());
-
+                String[] info = new String[1];
+                info[0] = paciente.getNombre();
                 registro.putExtra(ACT_INFO, info);
+                registro.putExtra("codigoPaciente", paciente.getCodigo());
                 startActivity(registro);
             }
         });
@@ -98,6 +90,7 @@ public class PacienteActivity extends AppCompatActivity {
         registro.putExtra(ACT_INFO, info);
         startActivity(registro);
     }
+
 
     protected void onResume(Bundle savedInstanceState) {
         mostrarListaPacientes();
