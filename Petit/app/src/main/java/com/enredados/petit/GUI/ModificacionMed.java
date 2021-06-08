@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +40,7 @@ public class ModificacionMed extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         Button modificar = findViewById(R.id.btnModificar);
+        Button eliminar = findViewById(R.id.btnEliminar);
         EditText tip = findViewById(R.id.txtTipo);
         EditText nom = findViewById(R.id.txtNombre);
         EditText st = findViewById(R.id.numStock);
@@ -49,13 +53,19 @@ public class ModificacionMed extends AppCompatActivity {
                 String codigo = bundle.getString("NombreMed");
                 String tipo = tip.getText().toString();
                 String nombre = nom.getText().toString();
-                //String stck[] = st.getText().toString().split(" ");
-                //System.out.println("STOCK: "+stck[0]);
+
                 double stock = Double.parseDouble(st.getText().toString());
 
                 MedicamentoDP medicamento = new MedicamentoDP(usuario, codigo, tipo, nombre, stock);
                 insertar(medicamento);
                 consultaParametro(medicamento.getCodMed());
+            }
+        });
+        eliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String codigo = bundle.getString("NombreMed");
+                eliminar(codigo);
             }
         });
     }
@@ -129,5 +139,44 @@ public class ModificacionMed extends AppCompatActivity {
         builder.setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+    private void eliminar(String cod){
+        db.collection("MEDICAMENTO").document(cod)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        showSuccesDelete();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        showAlertDelete();
+                    }
+                });
+    }
+
+    private void showSuccesDelete() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("ELIMINADO");
+        builder.setMessage("Se ha eliminado el medicamento de manera exitosa ");
+        builder.setPositiveButton("Aceptar", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showAlertDelete() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("ERROR");
+        builder.setMessage("No se a podido eliminar el medicamento");
+        builder.setPositiveButton("Aceptar", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void ventanaMedicamentos(View view){
+        Intent siguiente = new Intent(this, Medicamentos.class);
+        startActivity(siguiente);
     }
 }

@@ -4,11 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import com.enredados.petit.DP.MedicamentoDP;
 import com.enredados.petit.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,7 +28,7 @@ public class IngresoMed extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ingreso_med);
+        setContentView(R.layout.activity_ingreso_med);
         db = FirebaseFirestore.getInstance();
         Button agregar = findViewById(R.id.AgregarMed);
         EditText cod = findViewById(R.id.CodigoMed);
@@ -52,24 +52,6 @@ public class IngresoMed extends AppCompatActivity {
             }
         });
     }
-
-    public void ventanaConsultaParametro(View view){
-        Intent siguiente = new Intent(this, ConsultaParametroMed.class);
-        startActivity(siguiente);
-    }
-    public void ventanaConsultaGeneral(View view){
-        Intent siguiente = new Intent(this, ConsultaGeneralMed.class);
-        startActivity(siguiente);
-    }
-    public void ventanaEliminar(View view){
-        Intent siguiente = new Intent(this, EliminarMed.class);
-        startActivity(siguiente);
-    }
-    public void ventanaModificar(View view){
-        Intent siguiente = new Intent(this, ModificarMed.class);
-        startActivity(siguiente);
-    }
-
     private void insertar(MedicamentoDP medicamento){
 
         Map<String, Object> medicamentos = new HashMap<>();

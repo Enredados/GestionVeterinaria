@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Petit">
-        <activity android:name=".GUI.ModificacionMed"></activity>
+        <activity android:name=".GUI.IngresoMed"></activity>
+        <activity android:name=".GUI.ModificacionMed" />
         <activity android:name=".GUI.ModificarMed" />
         <activity android:name=".GUI.VisorDescripcion" />
         <activity android:name=".GUI.EliminarMed" />
@@ -44,7 +45,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GUI.IngresoMed"
+            android:name=".GUI.Medicamentos"
             android:parentActivityName=".GUI.HomeActivity" />
     </application>
 

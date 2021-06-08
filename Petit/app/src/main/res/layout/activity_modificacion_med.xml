@@ -64,5 +64,12 @@
             android:layout_height="wrap_content"
             android:text="MODIFICAR" />
 
+        <Button
+            android:id="@+id/btnEliminar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="ventanaMedicamentos"
+            android:text="Eliminar" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
