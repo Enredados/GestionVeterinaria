@@ -13,26 +13,31 @@ import android.widget.Toast;
 import com.enredados.petit.DP.PacienteDP;
 import com.enredados.petit.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
+
 
 public class PerfilMascota extends AppCompatActivity {
     private String codigoPaciente;
     private EditText nombre;
     private String[] info;
-    ArrayList<PacienteDP> pacientes = new ArrayList<PacienteDP>();
-    private FirebaseFirestore db;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     final static String INFO = "com.enredados.petit.GUI.IngresoPacienteActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_mascota);
 
-        nombre = (EditText) findViewById(R.id.nombreEText);
+        nombre = findViewById(R.id.nombreEText);
 
         Intent men = getIntent();
         info = men.getStringArrayExtra(PacienteActivity.ACT_INFO);
@@ -53,44 +58,54 @@ public class PerfilMascota extends AppCompatActivity {
         startActivity(visorHistorial);
     }
 
-    /*public void btn_verFicha(View vista) {
-        Intent ficha = new Intent(this, IngresoPacienteActivity.class);
+    public void btn_verFicha(View vista) {
         datosPaciente();
-        PacienteDP paciente = pacientes.get(0);
-        String[] info = new String[7];
-
-        info[0] = paciente.getCodigo();
-        info[1] = paciente.getNombre();
-        info[2] = paciente.getEspecie();
-        info[3] = paciente.getRaza();
-        info[4] = paciente.getGenero();
-        info[5] = paciente.getPeso();
-        info[6] = paciente.getEdad();
-
-        ficha.putExtra(INFO, info);
-        startActivity(ficha);
     }
     private void datosPaciente() {
-        db = FirebaseFirestore.getInstance();
-        db.collection("PACIENTE")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                PacienteDP paciente = new PacienteDP();
-                                paciente.setCodigo(document.getId().toString());
-                                paciente.setNombre(document.get("nombre").toString());
-                                paciente.setEspecie(document.get("especie").toString());
-                                paciente.setRaza(document.get("raza").toString());
-                                paciente.setGenero(document.get("genero").toString());
-                                paciente.setPeso(document.get("peso").toString());
-                                paciente.setEdad(document.get("edad").toString());
-                                pacientes.add(paciente);
-                            }
-                        }
+        Intent ficha = new Intent(this, IngresoPacienteActivity.class);
+        db.collection("PACIENTE").document(info[1]).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.exists()) {
+                    PacienteDP paciente = new PacienteDP();
+                    paciente.setCodigo(documentSnapshot.getId());
+                    if(documentSnapshot.contains("nombre")){
+                        paciente.setNombre(documentSnapshot.getString("nombre")); ;
                     }
-                });
-    }*/
+                    if(documentSnapshot.contains("especie")){
+                        paciente.setEspecie(documentSnapshot.getString("especie"));
+                    }
+                    if(documentSnapshot.contains("raza")){
+                        paciente.setRaza( documentSnapshot.getString("raza"));
+                    }
+                    if(documentSnapshot.contains("genero")){
+                        paciente.setGenero(documentSnapshot.getString("genero"));
+                    }
+                    if(documentSnapshot.contains("peso")){
+                        paciente.setPeso(documentSnapshot.getString("peso"));
+                    }
+                    if(documentSnapshot.contains("edad")){
+                        paciente.setEdad(documentSnapshot.getString("edad"));
+                    }
+                    if(documentSnapshot.contains("prop")){
+                        paciente.setCedula(documentSnapshot.getString("prop"));
+                    }
+                    String[] info = new String[8];
+
+                    info[0] = paciente.getCodigo();
+                    info[1] = paciente.getNombre();
+                    info[2] = paciente.getEspecie();
+                    info[3] = paciente.getRaza();
+                    info[4] = paciente.getGenero();
+                    info[5] = paciente.getPeso();
+                    info[6] = paciente.getEdad();
+                    info[7] = paciente.getCedula();
+
+                    ficha.putExtra(INFO, info);
+                    startActivity(ficha);
+                }
+            }
+        });
+    }
 }

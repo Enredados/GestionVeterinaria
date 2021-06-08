@@ -18,6 +18,8 @@ import com.enredados.petit.R;
 import com.enredados.petit.databinding.ActivityPacienteBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -29,6 +31,7 @@ public class PacienteActivity extends AppCompatActivity {
     ArrayList<PacienteDP> pacientes = new ArrayList<PacienteDP>();
     private FirebaseFirestore db;
     final static String ACT_INFO = "com.enredados.petit.GUI.PerfilMascota";
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +45,9 @@ public class PacienteActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent registro = new Intent(view.getContext(), PerfilMascota.class);
                 PacienteDP paciente = pacientes.get(position);
-                String[] info = new String[1];
+                String[] info = new String[2];
                 info[0] = paciente.getNombre();
+                info[1] = paciente.getCodigo();
                 registro.putExtra(ACT_INFO, info);
                 registro.putExtra("codigoPaciente", paciente.getCodigo());
                 startActivity(registro);
@@ -53,7 +57,7 @@ public class PacienteActivity extends AppCompatActivity {
     }
     private void mostrarListaPacientes() {
         db = FirebaseFirestore.getInstance();
-        db.collection("PACIENTE")
+        db.collection("PACIENTE").whereEqualTo("user", user.getEmail())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

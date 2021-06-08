@@ -26,6 +26,19 @@
                 android:orientation="vertical">
 
                 <EditText
+                    android:id="@+id/cedulaEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Cédula Dueño"
+                    android:inputType="text"
+                    android:textColor="@color/black" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp" />
+
+                <EditText
                     android:id="@+id/codigoEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
