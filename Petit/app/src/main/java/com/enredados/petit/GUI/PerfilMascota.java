@@ -108,4 +108,8 @@ public class PerfilMascota extends AppCompatActivity {
             }
         });
     }
+    public void btn_agendar(View v){
+        Intent agendar = new Intent(this, AgendarCita.class);
+        startActivity(agendar);
+    }
 }
