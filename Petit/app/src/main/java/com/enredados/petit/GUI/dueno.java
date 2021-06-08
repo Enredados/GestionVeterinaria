@@ -14,6 +14,7 @@ import com.enredados.petit.DP.DuenoDP;
 import com.enredados.petit.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -66,18 +67,17 @@ public class dueno extends AppCompatActivity {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 DuenoDP dueno = new DuenoDP();
+                                if(document.get("email").toString().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){}
                                 names.add(document.get("apellido").toString() + ", " + document.get("nombre").toString());
-                                dueno.setCedula(document.getId().toString());
+                                dueno.setCedula(document.getId());
                                 dueno.setNombre(document.get("nombre").toString());
                                 dueno.setApellido(document.get("apellido").toString());
                                 dueno.setDomicilio(document.get("domicilio").toString());
                                 dueno.setCiudad(document.get("ciudad").toString());
                                 dueno.setCelular(document.get("celular").toString());
-                                dueno.setEmail(document.get("email").toString());
                                 duenos.add(dueno);
                             }
                             setLista(names);
-                        } else {
                         }
                     }
                 });
@@ -98,6 +98,5 @@ public class dueno extends AppCompatActivity {
 
     protected void onResume(Bundle savedInstanceState) {
         mostrarListaDuenos();
-
     }
 }
