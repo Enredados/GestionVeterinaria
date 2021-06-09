@@ -1,6 +1,6 @@
 package com.enredados.petit.DP;
 
-import com.enredados.petit.MD.MedicamentoMD;
+
 
 public class MedicamentoDP {
     private String user;
@@ -8,10 +8,10 @@ public class MedicamentoDP {
     private String tipo_med;
     private String nom_med;
     private double stock_med;
-    private MedicamentoMD medicamentoMD;
+
+    public MedicamentoDP(){}
 
     public MedicamentoDP(String user, String cod_med, String tipo_med, String nom_med, double stock_med){
-        medicamentoMD = new MedicamentoMD();
         this.user = user;
         this.cod_med = cod_med;
         this.tipo_med = tipo_med;
@@ -19,9 +19,6 @@ public class MedicamentoDP {
         this.stock_med = stock_med;
     }
 
-    public MedicamentoDP(){
-        medicamentoMD = new MedicamentoMD();
-    }
     public void setUser(String user){
         this.user = user;
     }
@@ -52,13 +49,5 @@ public class MedicamentoDP {
     public double getStockMed(){
         return this.stock_med;
     }
-    /*public boolean guardarMed(){
-        //return medicamentoMD.insertar(cod_med, user, tipo_med, nom_med, stock_med);
-    }*/
-    public MedicamentoDP consultaParametro(String cod){
-
-        return medicamentoMD.consultaParametro(cod);
-    }
-
 }
 

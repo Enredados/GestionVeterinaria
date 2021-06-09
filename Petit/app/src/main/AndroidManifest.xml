@@ -9,17 +9,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Petit">
-        <activity android:name=".GUI.AgendarCita"></activity>
-        <activity android:name=".GUI.PerfilMascota" />
-        <activity android:name=".GUI.IngresoMed" />
-        <activity android:name=".GUI.ModificacionMed" />
-        <activity android:name=".GUI.ModificarMed" />
-        <activity android:name=".GUI.VisorDescripcion" />
-        <activity android:name=".GUI.EliminarMed" />
-        <activity android:name=".GUI.ConsultaGeneralMed" />
-        <activity android:name=".GUI.ConsultaParametroMed" />
-        <activity android:name=".GUI.HistorialCitasDescripcionActivity" />
-        <activity android:name=".GUI.HistorialCitasActivity" />
+
+        <activity android:name=".GUI.AgendarCita"
+            android:parentActivityName=".GUI.PerfilMascota">
+        </activity>
+
+        <activity android:name=".GUI.PerfilMascota"
+            android:parentActivityName=".GUI.PacienteActivity">
+        </activity>
+
+        <activity android:name=".GUI.IngresoMed"
+            android:parentActivityName=".GUI.Medicamentos">
+        </activity>
+
+        <activity android:name=".GUI.ModificacionMed"
+            android:parentActivityName=".GUI.Medicamentos">
+        </activity>
+
+        <activity android:name=".GUI.VisorDescripcion"/>
+
+        <activity android:name=".GUI.HistorialCitasDescripcionActivity"/>
+
+
+        <activity android:name=".GUI.HistorialCitasActivity"
+            android:parentActivityName=".GUI.PacienteActivity">
+        </activity>
+
         <activity
             android:name=".GUI.dueno"
             android:label="Clientes"
@@ -45,7 +60,6 @@
         <activity android:name=".GUI.AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

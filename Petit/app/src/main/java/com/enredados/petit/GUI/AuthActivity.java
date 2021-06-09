@@ -8,9 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.wifi.hotspot2.pps.Credential;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,11 +26,13 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class AuthActivity extends AppCompatActivity {
 
     //private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
     private SharedPreferences pref;
     private EditText emailView;
     private EditText passView;
@@ -50,12 +50,15 @@ public class AuthActivity extends AppCompatActivity {
         FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         GOOGLE_SIGN_IN = 100;
+        db = FirebaseFirestore.getInstance();
 
+        /*
         Bundle bundle = new Bundle();
         bundle.putString("message", "Integracion de firebase completa");
         mFirebaseAnalytics.logEvent("InitScreen", bundle);
+        */
 
-        emailView = findViewById(R.id.authLayout);
+        emailView = findViewById(R.id.mailEditText);
         passView = findViewById(R.id.passwordEditText);
         registrar = findViewById(R.id.signUpButton);
         ingresar = findViewById(R.id.logInButton);
@@ -63,13 +66,25 @@ public class AuthActivity extends AppCompatActivity {
         google = findViewById(R.id.googleButton);
         //setup
         setup();
-
+        sesion();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         authLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void sesion() {
+        pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+        String email = pref.getString("email", null);
+        String provider = pref.getString("provider", null);
+
+        if (email != null && provider != null) {
+            authLayout.setVisibility(View.INVISIBLE);
+            showHome(email, ProviderType.valueOf(provider));
+        }
+
     }
 
     public void setup() {
@@ -103,6 +118,7 @@ public class AuthActivity extends AppCompatActivity {
         });
     }
 
+
     public void googleSignIn(View view) {
         GoogleSignInOptions googleConf = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -114,6 +130,43 @@ public class AuthActivity extends AppCompatActivity {
         startActivityForResult(googleClient.getSignInIntent(), GOOGLE_SIGN_IN);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GOOGLE_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> task) {
+        try {
+            GoogleSignInAccount account = task.getResult(ApiException.class);
+            if (account != null) {
+                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+
+                /*
+                Map<String, Object> user = new HashMap<>();
+                user.put("nombre", account.getDisplayName());
+                user.put("apellido", account.getFamilyName());
+
+                db.collection("VETERINARIO").document(account.getEmail()).set(user);
+                */
+                FirebaseAuth.getInstance().signInWithCredential(credential);
+
+                if (task.isSuccessful()) {
+
+                    showHome(account.getEmail(), ProviderType.GOOGLE);
+                } else {
+                    showAlert();
+                }
+            }
+        } catch (ApiException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void showAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -134,45 +187,5 @@ public class AuthActivity extends AppCompatActivity {
     private void showRegistro() {
         Intent registroIntent = new Intent(this, RegistroActivity.class);
         startActivity(registroIntent);
-    }
-
-    private void sesion() {
-        pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
-        String email = pref.getString("email", null);
-        String provider = pref.getString("provider", null);
-
-        if (email != null && provider != null) {
-            authLayout.setVisibility(View.INVISIBLE);
-            showHome(email, ProviderType.valueOf(provider));
-        }
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == GOOGLE_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        }
-    }
-
-    private void handleSignInResult(Task<GoogleSignInAccount> task) {
-        try {
-            GoogleSignInAccount account = task.getResult(ApiException.class);
-            if (account != null) {
-                AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-                FirebaseAuth.getInstance().signInWithCredential(credential);
-
-                if (task.isSuccessful()) {
-                    showHome(account.getEmail(), ProviderType.GOOGLE);
-                } else {
-                    showAlert();
-                }
-            }
-        } catch (ApiException e) {
-            e.printStackTrace();
-        }
     }
 }

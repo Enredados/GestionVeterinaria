@@ -24,25 +24,20 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    ;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        System.out.println("USER: " + FirebaseAuth.getInstance().getCurrentUser().getEmail());
-
         //setup
         Bundle bundle = getIntent().getExtras();
         String email = bundle.getString("email");
-        String provider = bundle.getString("provider");
-
+        Object provider = bundle.get("provider");
 
         //Guardado de datos
         pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
-        pref.putString("email", FirebaseAuth.getInstance().getCurrentUser().getEmail());
-        pref.putString("provider", provider);
+        pref.putString("email", email);
+        pref.putString("provider", provider.toString());
         pref.apply();
     }
 
@@ -69,11 +64,5 @@ public class HomeActivity extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
         onBackPressed();
     }
-
-    public void showLogin() {
-        Intent logIn = new Intent(this, AuthActivity.class);
-        startActivity(logIn);
-    }
-
 
 }

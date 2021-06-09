@@ -12,19 +12,13 @@ import android.widget.EditText;
 
 import com.enredados.petit.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,7 +41,7 @@ public class RegistroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
 
         db = FirebaseFirestore.getInstance();
-        nombre = findViewById(R.id.authLayout);
+        nombre = findViewById(R.id.mailEditText);
         apellido = findViewById(R.id.apellidoEditText);
         cedula = findViewById(R.id.cedulaEditText);
         email = findViewById(R.id.emailEditText);
@@ -55,6 +49,7 @@ public class RegistroActivity extends AppCompatActivity {
 
         registro = findViewById(R.id.registrar);
         consultar = findViewById(R.id.consulta);
+
         //registro
         registro();
     }

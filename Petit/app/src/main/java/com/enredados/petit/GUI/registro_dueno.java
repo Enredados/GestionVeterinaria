@@ -85,6 +85,7 @@ public class registro_dueno extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        showLista();
                         toastAgregado();
                     }
                 })
@@ -116,6 +117,7 @@ public class registro_dueno extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
+                        showLista();
                         toastEliminado();
                     }
                 })
@@ -125,5 +127,10 @@ public class registro_dueno extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    public void showLista(){
+        Intent lista = new Intent(this, dueno.class);
+        startActivity(lista);
     }
 }

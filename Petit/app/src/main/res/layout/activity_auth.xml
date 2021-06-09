@@ -8,6 +8,7 @@
     tools:context=".GUI.AuthActivity">
 
     <LinearLayout
+        android:id="@+id/authLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -20,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/authLayout"
+            android:id="@+id/mailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -84,7 +85,7 @@
             android:background="@color/white"
             android:backgroundTint="#FFFFFF"
             android:onClick="googleSignIn"
-            android:text="Button"
+            android:text="Google"
             android:textColor="@color/black" />
 
     </LinearLayout>
