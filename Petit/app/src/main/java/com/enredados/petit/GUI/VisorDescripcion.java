@@ -94,7 +94,7 @@ public class VisorDescripcion extends AppCompatActivity {
     private void showSucces() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("REGISTRO");
-        builder.setMessage("Se ha ingresado el medicamento de manera exitosa ");
+        builder.setMessage("Descripción agregada correctamente");
         builder.setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -103,7 +103,7 @@ public class VisorDescripcion extends AppCompatActivity {
     private void showAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("ERROR");
-        builder.setMessage("No se a podido ingresar el medicamento ");
+        builder.setMessage("No se a podido ingresar la descripción ");
         builder.setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();
