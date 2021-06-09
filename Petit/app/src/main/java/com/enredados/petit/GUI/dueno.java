@@ -15,6 +15,7 @@ import com.enredados.petit.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 public class dueno extends AppCompatActivity {
     ListView listview;
     ArrayList<DuenoDP> duenos = new ArrayList<DuenoDP>();
+    FirebaseUser usr = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseFirestore db;
     final static String ACT_INFO = "com.enredados.petit.GUI.registro_dueno";
 
@@ -57,7 +59,7 @@ public class dueno extends AppCompatActivity {
 
     private void mostrarListaDuenos() {
         db = FirebaseFirestore.getInstance();
-        db.collection("PROPIETARIO")
+        db.collection("PROPIETARIO").whereEqualTo("email", usr.getEmail())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

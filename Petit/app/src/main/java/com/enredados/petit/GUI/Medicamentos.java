@@ -57,7 +57,7 @@ public class Medicamentos extends AppCompatActivity {
 
     }
     private void consultaGeneral(){
-        db.collection("MEDICAMENTO")
+        db.collection("MEDICAMENTO").whereEqualTo("user", usr.getEmail())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

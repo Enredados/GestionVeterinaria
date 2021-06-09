@@ -125,7 +125,7 @@ public class AuthActivity extends AppCompatActivity {
                 .requestEmail().build();
 
         GoogleSignInClient googleClient = GoogleSignIn.getClient(this, googleConf);
-        // googleClient.signOut();
+         googleClient.signOut();
 
         startActivityForResult(googleClient.getSignInIntent(), GOOGLE_SIGN_IN);
     }

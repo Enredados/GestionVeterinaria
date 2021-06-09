@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#414145"
+    android:background="#EFE9DE"
     tools:context=".GUI.AuthActivity">
 
     <LinearLayout
@@ -23,12 +23,12 @@
         <EditText
             android:id="@+id/mailEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:ems="10"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            android:textColor="#FDFDFD"
-            android:textColorHint="#E4E4E4" />
+            android:textColor="#000000"
+            android:textColorHint="#000000" />
 
         <Space
             android:layout_width="match_parent"
@@ -41,8 +41,8 @@
             android:ems="10"
             android:hint="Contraseña"
             android:inputType="textPassword"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
+            android:textColor="#000000"
+            android:textColorHint="#070707" />
 
         <Space
             android:layout_width="match_parent"
@@ -86,7 +86,7 @@
             android:backgroundTint="#FFFFFF"
             android:onClick="googleSignIn"
             android:text="Google"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

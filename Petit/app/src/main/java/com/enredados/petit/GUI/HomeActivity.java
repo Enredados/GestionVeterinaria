@@ -30,15 +30,20 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         //setup
-        Bundle bundle = getIntent().getExtras();
-        String email = bundle.getString("email");
-        Object provider = bundle.get("provider");
+        try{
+            Bundle bundle = getIntent().getExtras();
+            String email = bundle.getString("email");
+            Object provider = bundle.get("provider");
 
-        //Guardado de datos
-        pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
-        pref.putString("email", email);
-        pref.putString("provider", provider.toString());
-        pref.apply();
+            //Guardado de datos
+            pref = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
+            pref.putString("email", email);
+            pref.putString("provider", provider.toString());
+            pref.apply();
+        }catch(Exception e){
+
+        }
+
     }
 
     public void abrirDueno(View vista) {
