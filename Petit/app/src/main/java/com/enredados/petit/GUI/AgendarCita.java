@@ -21,6 +21,8 @@ import android.widget.Toast;
 import com.enredados.petit.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
@@ -38,6 +40,7 @@ public class AgendarCita extends AppCompatActivity {
     int tHour, tMinute;
     private Spinner tipoCitaSpinner;
     DatePickerDialog.OnDateSetListener setListener;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +126,7 @@ public class AgendarCita extends AppCompatActivity {
         citas.put("fecha", fecha);
         citas.put("hora", hora);
         citas.put("descripcion", "");
-        //citas.put("user", user.getEmail());
+        citas.put("user", user.getEmail());
 
         FirebaseFirestore db= FirebaseFirestore.getInstance();
         db.collection("CITA").document(codigo)
