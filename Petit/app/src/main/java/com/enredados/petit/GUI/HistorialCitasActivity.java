@@ -40,6 +40,7 @@ public class HistorialCitasActivity extends AppCompatActivity {
     private Adaptador adaptador;
     FirebaseFirestore db;
     private String codigoPaciente;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class HistorialCitasActivity extends AppCompatActivity {
                 visorDescripcion.putExtra("tipo", ((Modelo) items.get(position)).getTipo());
                 visorDescripcion.putExtra("fecha", ((Modelo) items.get(position)).getFecha());
                 visorDescripcion.putExtra("descripcion", ((Modelo) items.get(position)).getDescripcion());
+                visorDescripcion.putExtra("codigoPaciente", codigoPaciente);
                 startActivity(visorDescripcion);
             }
         });
@@ -94,7 +96,7 @@ public class HistorialCitasActivity extends AppCompatActivity {
         ArrayList<Modelo> citasArrayList = new ArrayList<>();
         try {
             db.collection("CITA")
-                    .whereEqualTo("paciente", codigoPaciente)
+                    .whereEqualTo("codigo", codigoPaciente)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -104,8 +106,9 @@ public class HistorialCitasActivity extends AppCompatActivity {
                                     citasArrayList.add(new Modelo(
                                             document.get("tipo").toString(),
                                             document.get("descripcion").toString(),
-                                            ((Timestamp) document.get("fecha")).toDate().toString()
+                                            document.get("fecha").toString()
                                     ));
+
                                     cargarCitas(citasArrayList);
                                 }
                             }
