@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class PerfilMascota extends AppCompatActivity {
-    private String codigoPaciente;
+    private String codigoPaciente = "";
     private EditText nombre;
     private String[] info;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -110,6 +110,7 @@ public class PerfilMascota extends AppCompatActivity {
     }
     public void btn_agendar(View v){
         Intent agendar = new Intent(this, AgendarCita.class);
+        agendar.putExtra("paciente",codigoPaciente);
         startActivity(agendar);
     }
 }

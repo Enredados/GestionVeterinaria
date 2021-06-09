@@ -40,12 +40,14 @@ public class AgendarCita extends AppCompatActivity {
     int tHour, tMinute;
     private Spinner tipoCitaSpinner;
     DatePickerDialog.OnDateSetListener setListener;
+    private String paciente;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agendar_cita);
+        paciente = getIntent().getStringExtra("paciente");
 
         etFecha = findViewById(R.id.et_fecha);
         etCodigo = findViewById(R.id.et_Codigo);
@@ -69,10 +71,8 @@ public class AgendarCita extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         month = month+1;
-                        String date = day+"/"+month+"/"+year;
+                        String date = day+"-"+month+"-"+year;
                         etFecha.setText(date);
-
-                        System.out.println(date);
                     }
                 },year,month,day);
                 datePickerDialog.show();
@@ -99,8 +99,6 @@ public class AgendarCita extends AppCompatActivity {
                                             "hh:mm aa"
                                     );
                                     tvHora.setText(f12Hours.format(date));
-
-                                    System.out.println(f12Hours.format(date));
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
@@ -114,14 +112,12 @@ public class AgendarCita extends AppCompatActivity {
         });
     }
     public void ingresar(View v){
-        String codigo = etCodigo.getText().toString();
         String tipoCita = tipoCitaSpinner.getSelectedItem().toString();
         String fecha = etFecha.getText().toString();
         String hora = tvHora.getText().toString();
 
-
         Map<String, Object> citas = new HashMap<>();
-        citas.put("codigo", codigo);
+        citas.put("paciente", paciente);
         citas.put("tipo", tipoCita);
         citas.put("fecha", fecha);
         citas.put("hora", hora);
@@ -129,7 +125,7 @@ public class AgendarCita extends AppCompatActivity {
         citas.put("user", user.getEmail());
 
         FirebaseFirestore db= FirebaseFirestore.getInstance();
-        db.collection("CITA").document(codigo)
+        db.collection("CITA").document((fecha+"-"+paciente).toString())
                 .set(citas)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

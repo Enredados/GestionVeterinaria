@@ -96,7 +96,7 @@ public class HistorialCitasActivity extends AppCompatActivity {
         ArrayList<Modelo> citasArrayList = new ArrayList<>();
         try {
             db.collection("CITA")
-                    .whereEqualTo("codigo", codigoPaciente)
+                    .whereEqualTo("paciente", codigoPaciente)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
