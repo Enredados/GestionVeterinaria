@@ -139,6 +139,7 @@ public class AgendarCita extends AppCompatActivity {
                     }
                 });
         Intent lista = new Intent(v.getContext(), PacienteActivity.class);
+        lista.putExtra("codigoPaciente", paciente);
         startActivity(lista);
     }
     private void toastAgregado(){

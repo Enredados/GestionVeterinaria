@@ -11,7 +11,7 @@
         android:theme="@style/Theme.Petit">
 
         <activity android:name=".GUI.AgendarCita"
-            android:parentActivityName=".GUI.PerfilMascota">
+            android:parentActivityName=".GUI.PacienteActivity">
         </activity>
 
         <activity android:name=".GUI.PerfilMascota"
@@ -28,7 +28,9 @@
 
         <activity android:name=".GUI.VisorDescripcion"/>
 
-        <activity android:name=".GUI.HistorialCitasDescripcionActivity"/>
+        <activity android:name=".GUI.HistorialCitasDescripcionActivity"
+            android:parentActivityName=".GUI.PacienteActivity">
+        </activity>
 
 
         <activity android:name=".GUI.HistorialCitasActivity"
