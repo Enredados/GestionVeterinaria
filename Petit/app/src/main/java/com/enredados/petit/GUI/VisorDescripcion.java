@@ -34,6 +34,7 @@ public class VisorDescripcion extends AppCompatActivity {
     FirebaseFirestore db;
     String codigoPaciente;
     String id;
+    String fechaStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +51,12 @@ public class VisorDescripcion extends AppCompatActivity {
         Bundle b = intent.getExtras();
 
         if(b != null){
+            fechaStr = b.getString("fecha");
             tipo.setText(b.getString("tipo"));
-            fecha.setText(b.getString("fecha"));
+            fecha.setText(fechaStr);
             descripcion.setText(b.getString("descripcion"));
             codigoPaciente = b.getString("codigoPaciente");
+
         }
 
         // guardar la descripcion de la cita
@@ -72,7 +75,7 @@ public class VisorDescripcion extends AppCompatActivity {
         Map<String, Object> update = new HashMap<>();
         update.put("descripcion", descripcion);
 
-        db.collection("CITA").document("perro3").update(update)
+        db.collection("CITA").document(fechaStr+"-"+codigoPaciente).update(update)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
