@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AgendarCita extends AppCompatActivity {
-    EditText etFecha, etCodigo;
+    EditText etFecha;
     TextView tvHora;
     int tHour, tMinute;
     private Spinner tipoCitaSpinner;
@@ -50,7 +50,6 @@ public class AgendarCita extends AppCompatActivity {
         paciente = getIntent().getStringExtra("paciente");
 
         etFecha = findViewById(R.id.et_fecha);
-        etCodigo = findViewById(R.id.et_Codigo);
         tvHora = findViewById(R.id.tv_Hora);
         tipoCitaSpinner = findViewById(R.id.tipo_CitaSpinner);
 
@@ -148,29 +147,6 @@ public class AgendarCita extends AppCompatActivity {
     }
     private void toastError(){
         Toast.makeText(this, "Se ha producido un error",
-                Toast.LENGTH_SHORT).show();
-    }
-    public void eliminar(View v){
-        FirebaseFirestore db= FirebaseFirestore.getInstance();
-        db.collection("CITA").document(etCodigo.getText().toString())
-                .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        toastEliminado();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull @NotNull Exception e) {
-
-                    }
-                });
-        Intent lista = new Intent(v.getContext(), PerfilMascota.class);
-        startActivity(lista);
-    }
-    private void toastEliminado(){
-        Toast.makeText(this, "Cita eliminada",
                 Toast.LENGTH_SHORT).show();
     }
 }
