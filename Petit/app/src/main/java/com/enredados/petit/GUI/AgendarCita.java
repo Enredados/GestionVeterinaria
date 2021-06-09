@@ -118,7 +118,7 @@ public class AgendarCita extends AppCompatActivity {
 
 
         Map<String, Object> citas = new HashMap<>();
-        citas.put("codigo", codigo);
+        citas.put("paciente", codigo);
         citas.put("tipo", tipoCita);
         citas.put("fecha", fecha);
         citas.put("hora", hora);
@@ -139,8 +139,8 @@ public class AgendarCita extends AppCompatActivity {
                         toastError();
                     }
                 });
-        Intent perfil = new Intent(v.getContext(), PerfilMascota.class);
-        startActivity(perfil);
+        Intent lista = new Intent(v.getContext(), PacienteActivity.class);
+        startActivity(lista);
     }
     private void toastAgregado(){
         Toast.makeText(this, "Cita agendada exitosamente",
@@ -166,8 +166,8 @@ public class AgendarCita extends AppCompatActivity {
 
                     }
                 });
-        Intent perfil = new Intent(v.getContext(), PerfilMascota.class);
-        startActivity(perfil);
+        Intent lista = new Intent(v.getContext(), PerfilMascota.class);
+        startActivity(lista);
     }
     private void toastEliminado(){
         Toast.makeText(this, "Cita eliminada",
