@@ -118,7 +118,7 @@ public class AgendarCita extends AppCompatActivity {
 
 
         Map<String, Object> citas = new HashMap<>();
-        citas.put("paciente", codigo);
+        citas.put("codigo", codigo);
         citas.put("tipo", tipoCita);
         citas.put("fecha", fecha);
         citas.put("hora", hora);
