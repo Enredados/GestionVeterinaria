@@ -122,6 +122,7 @@ public class AgendarCita extends AppCompatActivity {
         citas.put("tipo", tipoCita);
         citas.put("fecha", fecha);
         citas.put("hora", hora);
+        citas.put("descripcion", "");
         //citas.put("user", user.getEmail());
 
         FirebaseFirestore db= FirebaseFirestore.getInstance();
