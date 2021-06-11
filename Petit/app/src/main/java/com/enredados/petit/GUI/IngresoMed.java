@@ -14,6 +14,7 @@ import com.enredados.petit.DP.MedicamentoDP;
 import com.enredados.petit.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,7 +32,7 @@ public class IngresoMed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingreso_med);
         db = FirebaseFirestore.getInstance();
-        Button agregar = findViewById(R.id.AgregarMed);
+        FloatingActionButton agregar = findViewById(R.id.AgregarMed);
         EditText cod = findViewById(R.id.CodigoMed);
         EditText tip = findViewById(R.id.TipoMed);
         EditText nom = findViewById(R.id.NombreMed);
